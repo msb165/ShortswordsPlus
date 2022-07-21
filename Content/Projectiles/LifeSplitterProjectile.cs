@@ -10,7 +10,7 @@ namespace MoreShortswords.Content.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Life Splitter");
+            DisplayName.SetDefault("Life Splitter");            
         }
         public override void SetDefaults()
         {
@@ -53,7 +53,7 @@ namespace MoreShortswords.Content.Projectiles
 
             Player player = new();
 
-            if (Main.rand.NextBool(2) && player.ownedProjectileCounts[ModContent.ProjectileType<LifeSplitterProjectile2>()] < 4) 
+            if (Main.rand.NextBool(2) && player.ownedProjectileCounts[ModContent.ProjectileType<LifeSplitterProjectile2>()] < 4 && target.type != NPCID.TargetDummy) 
             {
                 for (int projsToSpawn = 0; projsToSpawn < 4; projsToSpawn++)
                 {

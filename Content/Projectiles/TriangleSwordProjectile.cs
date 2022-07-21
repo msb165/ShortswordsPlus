@@ -14,7 +14,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetDefaults()
         {
-            base.SetDefaults();
+            base.SetDefaults();            
             Projectile.ArmorPenetration = 30;
         }
 
@@ -43,7 +43,5 @@ namespace MoreShortswords.Content.Projectiles
             DrawOffsetX = -((50 / 2) - halfProjWidth);
             DrawOriginOffsetY = -((50 / 2) - halfProjHeight);
         }
-
-
     }
 }

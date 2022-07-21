@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.Graphics.Shaders;
+using Terraria.Graphics;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -25,16 +27,16 @@ namespace MoreShortswords.Content.Projectiles
         
         public override string Texture => myStringArray[Main.rand.Next(0, myStringArray.Length)];
 
+
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-            
+
             int frameHeight = texture.Height / Main.projFrames[Projectile.type];
             int startY = frameHeight * Projectile.frame;
 
             Rectangle sourceRectangle = new Rectangle(0, startY, texture.Width, frameHeight);
             Vector2 origin = sourceRectangle.Size() / 2f;
-
 
             SpriteEffects spriteEffects = SpriteEffects.None;
             if (Projectile.direction == -1)

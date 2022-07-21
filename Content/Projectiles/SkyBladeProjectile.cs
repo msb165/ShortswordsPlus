@@ -32,7 +32,7 @@ namespace MoreShortswords.Content.Projectiles
             target.AddBuff(BuffID.Weak, 100);
             Player player = new();
             Player projOwner = Main.player[Projectile.owner];
-            if (projOwner.ownedProjectileCounts[ProjectileID.SkyFracture] < 2)
+            if (projOwner.ownedProjectileCounts[ProjectileID.SkyFracture] < 2 && target.type != NPCID.TargetDummy)
             {
                 for (int numOfProjs = 0; numOfProjs < 2; numOfProjs++)
                 {                    

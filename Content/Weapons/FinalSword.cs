@@ -13,6 +13,7 @@ namespace MoreShortswords.Content.Weapons
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Apogee");
+            Tooltip.SetDefault("\"Say goodbye to death.\"");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -22,8 +23,7 @@ namespace MoreShortswords.Content.Weapons
 
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.useAnimation = 12;
-            Item.useTime = Item.useAnimation / 2;
-            
+            Item.useTime = Item.useAnimation / 2;            
 
             Item.UseSound = SoundID.Item1;
 

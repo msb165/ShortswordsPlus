@@ -52,8 +52,9 @@ namespace MoreShortswords.Content.Projectiles
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(BuffID.Weak, 60);
+
             
-            if (Main.rand.NextBool(2))
+            if (Main.rand.NextBool(2) && target.type != NPCID.TargetDummy)
             {
                 for (int numOfStars = 0; numOfStars < 3; numOfStars++)
                 {

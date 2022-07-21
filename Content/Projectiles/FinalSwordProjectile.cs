@@ -11,7 +11,7 @@ namespace MoreShortswords.Content.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Apogee");            
+            DisplayName.SetDefault("Apogee");           
         }
 
         public override void SetDefaults()

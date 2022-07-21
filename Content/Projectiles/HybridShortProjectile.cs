@@ -28,13 +28,13 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            Player player = new();           
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<HybridShortProjectile2>()] < 4)
+            Player player = new();  
+            
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<HybridShortProjectile2>()] < 4 && target.type != NPCID.TargetDummy)
             {
                 Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.Center.X, target.Center.Y - target.height*8f), new Vector2(0f, 15f), ModContent.ProjectileType<HybridShortProjectile2>(), 25, 5f, player.whoAmI);              
                
-            }                  
-            
+            }        
 
         }
 

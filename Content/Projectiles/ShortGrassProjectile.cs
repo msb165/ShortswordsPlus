@@ -40,8 +40,6 @@ namespace MoreShortswords.Content.Projectiles
             {
                 target.AddBuff(BuffID.Poisoned, 420);
             }
-        }
-
-        
+        }        
     }
 }

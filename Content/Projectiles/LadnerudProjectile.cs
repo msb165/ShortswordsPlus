@@ -30,7 +30,6 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            Player player = new();
             Player projOwner = Main.player[Projectile.owner];            
 
             if (!projOwner.HasBuff(BuffID.SwordWhipPlayerBuff))
