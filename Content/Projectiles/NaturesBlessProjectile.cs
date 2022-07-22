@@ -54,7 +54,7 @@ namespace MoreShortswords.Content.Projectiles
             }
 
        
-            if (projOwner.ownedProjectileCounts[ProjectileID.VilethornBase] < 6)
+            if (projOwner.ownedProjectileCounts[ProjectileID.VilethornBase] < 6 && target.type != NPCID.TargetDummy)
             {           
                 int thornProj = Projectile.NewProjectile(target.GetSource_OnHit(target), projOwner.Center, Projectile.velocity*4.5f, ProjectileID.VilethornBase, 65, 4f, player.whoAmI);
                 Main.projectile[thornProj].ArmorPenetration = 80;
