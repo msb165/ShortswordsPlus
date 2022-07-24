@@ -70,8 +70,7 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.CobaltBar, 8)
-                .AddIngredient(ItemID.Boulder, 25)
+                .AddIngredient(ItemID.CobaltBar, 8)                .
                 .AddIngredient(ItemID.SoulofMight, 8)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
