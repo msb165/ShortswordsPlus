@@ -23,9 +23,11 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.ownerHitCheck = true;            
             Projectile.ArmorPenetration = 10;
             Projectile.aiStyle = -1;
-            Projectile.width = 56;
-            Projectile.height = 56;
+            Projectile.width = 52;
+            Projectile.height = 52;
             Projectile.hide = true;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 30;
         }
 
         public override void AI()

@@ -21,7 +21,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            base.AI();
+            base.AI();          
 
             if (!Main.dedServ)
             {

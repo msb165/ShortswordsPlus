@@ -47,7 +47,7 @@ namespace MoreShortswords.Content.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<FinalSwordProjectile2>()] < 6 && !player.dead)
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<FinalSwordProjectile2>()] < 6)
             {
                 Projectile.NewProjectile(source, new Vector2(position.X, position.Y), velocity * 1.25f, ModContent.ProjectileType<FinalSwordProjectile2>(), (int)(Item.damage * 1.25f), 4f, player.whoAmI);                
             }

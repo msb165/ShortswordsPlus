@@ -20,7 +20,7 @@ namespace MoreShortswords.Content.Weapons
             Item.width = 56;
             Item.height = 56;
 
-            Item.damage = 12;
+            Item.damage = 10;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -30,7 +30,7 @@ namespace MoreShortswords.Content.Weapons
 
             Item.useTime = 10;
             Item.useAnimation = 10;
-
+            Item.knockBack = 4.0f;
 
             Item.channel = true;
             Item.autoReuse = true;

@@ -44,6 +44,7 @@ namespace MoreShortswords.Content.Projectiles
             }            
         }
 
+
         private void SetVisualOffsets()
         {
             int halfProjWidth = Projectile.width / 2;

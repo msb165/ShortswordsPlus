@@ -53,6 +53,7 @@ namespace MoreShortswords.Content.Projectiles
         {
             target.AddBuff(BuffID.Weak, 60);
 
+            Player player = new();
             
             if (Main.rand.NextBool(2) && target.type != NPCID.TargetDummy)
             {
@@ -65,8 +66,7 @@ namespace MoreShortswords.Content.Projectiles
                     float num18 = (float)Math.Sqrt(num16 * num16 + num17 * num17);
                     num18 = 25f / num18;
                     num16 *= num18;
-                    num17 *= num18;
-                    Player player = new();
+                    num17 *= num18;                   
                     
                     Projectile.NewProjectile(target.GetSource_OnHit(target), vector, new Vector2(num16, num17), ProjectileID.StarCloakStar, 10, 4f, player.whoAmI, 0f, Projectile.position.Y);
 
