@@ -26,7 +26,7 @@ namespace MoreShortswords.Content.Weapons
 
             Item.knockBack = 3.5f;            
 
-            Item.damage = 19;
+            Item.damage = 16;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.rare = ItemRarityID.Orange;

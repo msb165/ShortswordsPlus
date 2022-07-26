@@ -27,6 +27,9 @@ namespace MoreShortswords.Content.Projectiles
         {
             base.AI();
             Projectile.rotation += 0.25f * Projectile.direction;
+       
+            int boomDust = Dust.NewDust(Projectile.oldPosition, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan, Projectile.velocity.X * 0.25f, Projectile.velocity.Y * 0.25f, 150, default, 0.50f);
+            Main.dust[boomDust].noGravity = true;            
 
             Player _ = new()
             {

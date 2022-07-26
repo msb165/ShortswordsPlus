@@ -32,13 +32,12 @@ namespace MoreShortswords.Content.Weapons
             Item.damage = 59;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
-            Item.rare = ItemRarityID.White;
+            Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 0, 35, 15);
 
             Item.crit = 8;
                         
-            Item.shootSpeed = 4.7f;
-            
+            Item.shootSpeed = 4.7f;            
 
             Item.noUseGraphic = true;
             Item.noMelee = true;
@@ -50,8 +49,6 @@ namespace MoreShortswords.Content.Weapons
             return player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile2>()] < 1;
         }
 
-
-
         public override bool CanUseItem(Player player)
         {
             if (player.altFunctionUse == 2)
@@ -62,7 +59,7 @@ namespace MoreShortswords.Content.Weapons
             {
                 Item.shoot = ModContent.ProjectileType<MagicBladeProjectile>();
             }
-            return base.CanUseItem(player);
+            return player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile2>()] < 1 && player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile>()] < 1;
         }
 
 
@@ -71,7 +68,6 @@ namespace MoreShortswords.Content.Weapons
         {
             CreateRecipe()
                 .AddIngredient(ItemID.CobaltBar, 8)
-                .AddIngredient(ItemID.Boulder, 25)
                 .AddIngredient(ItemID.SoulofMight, 8)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();

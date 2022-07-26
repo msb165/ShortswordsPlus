@@ -31,26 +31,25 @@ namespace MoreShortswords.Content.Projectiles
         }
 
         public override void AI()
-        {            
+        {  
+            Player player = Main.player[Projectile.owner];
+
+            player.itemTime = player.itemAnimation = 2;
+            player.itemRotation = Projectile.rotation;
+            player.heldProj = Projectile.whoAmI;
+
+            Projectile.rotation += 0.4f * player.direction;           
+            Projectile.Center = player.MountedCenter + new Vector2(30f * player.direction, 0f);
+            Projectile.position.Y = player.position.Y;
+            Projectile.spriteDirection = player.direction; 
+
             if (Projectile.soundDelay <= 0)
             {
                 SoundEngine.PlaySound(SoundID.Item22, Projectile.position);
                 Projectile.soundDelay = 30;
             }
 
-            Player player = Main.player[Projectile.owner];
-                       
-            Projectile.rotation += 0.4f * player.direction;
-            // Projectile.position.X = Projectile.position.X + (player.width / 2 * player.direction);            
-            Projectile.Center = player.MountedCenter + new Vector2(30f * player.direction, 0f);
-            Projectile.position.Y = player.position.Y;
-            Projectile.spriteDirection = player.direction;
-
-            player.itemTime = player.itemAnimation = 2;        
-            player.itemRotation = Projectile.rotation;
-            player.heldProj = Projectile.whoAmI;
-
-            if (Main.myPlayer == Projectile.owner && !player.controlUseItem)
+            if (Main.myPlayer == Projectile.owner && (!player.controlUseItem && !player.noItems && !player.CCed))
             {
                 Projectile.Kill();
             }      

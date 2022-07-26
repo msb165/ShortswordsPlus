@@ -23,7 +23,7 @@ namespace MoreShortswords.Content.Weapons
             Item.useTime = 23;
             Item.UseSound = SoundID.Item71;
 
-            Item.damage = 32;
+            Item.damage = 30;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 4.2f;
 
@@ -41,7 +41,7 @@ namespace MoreShortswords.Content.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {            
-            Projectile.NewProjectile(source, position, velocity * 3.5f, ModContent.ProjectileType<DayAbominationProjectile2>(), 6, 3.5f, player.whoAmI);            
+            Projectile.NewProjectile(source, position, velocity * 3.7f, ModContent.ProjectileType<DayAbominationProjectile2>(), 6, 3.5f, player.whoAmI);            
             return true;
         }            
 
@@ -54,9 +54,6 @@ namespace MoreShortswords.Content.Weapons
                 .AddIngredient(ItemID.CopperShortsword, 1)
                 .AddTile(TileID.Anvils)
                 .Register();
-
         }
-
-
     }
 }

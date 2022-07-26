@@ -10,8 +10,7 @@ namespace MoreShortswords.Content.Projectiles
     {
         public override string Texture => "MoreShortswords/Content/Projectiles/MagicBladeProjectile";
 
-        public Vector2 aimedDirection;
-
+        
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Deity Spear");           
@@ -25,9 +24,9 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.friendly = true;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = 300;
             Projectile.ArmorPenetration = 15;
-            Projectile.alpha = 255;
+            Projectile.alpha = 255;            
         }
 
         public override void AI()

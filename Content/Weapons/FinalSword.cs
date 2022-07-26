@@ -62,7 +62,7 @@ namespace MoreShortswords.Content.Weapons
                 .AddIngredient(ModContent.ItemType<CosmicBlade>(), 1)
                 .AddIngredient(ModContent.ItemType<SkyBlade>(), 1)
                 .AddIngredient(ItemID.PlatinumShortsword, 1)                
-                .AddIngredient(ItemID.LunarBar, 7)
+                .AddIngredient(ItemID.LunarBar, 10)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();            
         }
