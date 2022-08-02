@@ -15,6 +15,8 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();
+            Projectile.width = 38;
+            Projectile.height = 38;
             Projectile.ArmorPenetration = 2;
         }
 

@@ -7,8 +7,7 @@ using MoreShortswords.Content.Projectiles;
 namespace MoreShortswords.Content.Weapons
 {
     public class Ladnerud : ModItem
-    {
-        
+    {       
         
         public override void SetStaticDefaults()
         {
@@ -28,7 +27,7 @@ namespace MoreShortswords.Content.Weapons
 
             Item.knockBack = 4.7f;
 
-            Item.damage = 62;
+            Item.damage = 57;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.rare = ItemRarityID.Pink;

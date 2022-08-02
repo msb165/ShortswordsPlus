@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
+using System;
 namespace MoreShortswords.Content.Projectiles
 {
     public class DayAbominationProjectile2 : ModProjectile
@@ -12,7 +13,7 @@ namespace MoreShortswords.Content.Projectiles
             DisplayName.SetDefault("Daylight's Abomination");
         }
         public override void SetDefaults()
-        {            
+        {       
             Projectile.penetrate = 2;
             Projectile.friendly = true;
             Projectile.width = 10;
@@ -64,7 +65,7 @@ namespace MoreShortswords.Content.Projectiles
             for (int j = 0; j < 2; j++)
             {
                 Vector2 newVelocity = Vector2.Normalize(Projectile.velocity) * 14f;
-                float[] value = {0f, 5f, -5f};
+                float[] value = {0f, 3f, -3f};
                 // newVelocity = newVelocity.RotatedBy(Projectile.rotation * MathHelper.PiOver2 - MathHelper.PiOver4);
                 newVelocity = newVelocity.RotatedBy(value[j] * MathHelper.PiOver2 - MathHelper.PiOver4);
                 Projectile.NewProjectile(Projectile.GetSource_Death(), new Vector2(Projectile.position.X + (10f * Projectile.direction), Projectile.position.Y + 10f), newVelocity, ModContent.ProjectileType<DayAbominationProjectile3>(), Projectile.damage / 2, 4f, player.whoAmI);

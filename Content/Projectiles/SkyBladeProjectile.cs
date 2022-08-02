@@ -16,7 +16,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.ArmorPenetration = 20;
+            Projectile.ArmorPenetration = 25;
         }
 
         public override void AI()
@@ -28,17 +28,18 @@ namespace MoreShortswords.Content.Projectiles
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
-        {
+        {    
             target.AddBuff(BuffID.Weak, 100);
             Player player = new();
             Player projOwner = Main.player[Projectile.owner];
-            if (projOwner.ownedProjectileCounts[ProjectileID.SkyFracture] < 2 && target.type != NPCID.TargetDummy)
+            if (projOwner.ownedProjectileCounts[ProjectileID.SkyFracture] < 3 && target.type != NPCID.TargetDummy)
             {
-                for (int numOfProjs = 0; numOfProjs < 2; numOfProjs++)
-                {                    
-                    int Newproj = Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.position.X + (Projectile.direction * 200), Projectile.position.Y + Main.rand.Next(-10, 11)), new Vector2((Projectile.velocity.X * 1.45f) * -player.direction, Projectile.velocity.Y), ProjectileID.SkyFracture, 45, 6f, player.whoAmI);
+                for (int numOfProjs = 0; numOfProjs < 3; numOfProjs++)
+                {
+                    int Newproj = Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.position.X + (Projectile.direction * 200), Projectile.position.Y + Main.rand.Next(-20, 21)), new Vector2((Projectile.velocity.X * 2f) * -player.direction, Projectile.velocity.Y), ProjectileID.SkyFracture, 45, 6f, player.whoAmI);
                     Main.projectile[Newproj].tileCollide = false;
-                    Main.projectile[Newproj].timeLeft = 100;
+                    Main.projectile[Newproj].timeLeft = 120;
+
                 }
             }            
         }

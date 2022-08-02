@@ -1,5 +1,5 @@
 displayName = Shortswords+
 author = Kosky
-version = 0.8
+version = 0.9
 hideCode = false
 includeSource = true

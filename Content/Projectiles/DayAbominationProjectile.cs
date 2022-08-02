@@ -38,14 +38,7 @@ namespace MoreShortswords.Content.Projectiles
                 Projectile.timeLeft = duration;
             }
 
-            if (Projectile.timeLeft < halfDuration)
-            {
-                progress = Projectile.timeLeft / halfDuration;
-            }
-            else
-            {
-                progress = (duration - Projectile.timeLeft) / halfDuration;
-            }
+            progress = Projectile.timeLeft < halfDuration ? Projectile.timeLeft / halfDuration : (duration - Projectile.timeLeft) / halfDuration;
 
             Projectile.Center = player.MountedCenter + Vector2.SmoothStep(Projectile.velocity * HoldoutRangeMin, Projectile.velocity * HoldoutRangeMax, progress);
             Projectile.rotation = Projectile.rotation * Projectile.spriteDirection + MathHelper.ToRadians(90f);
@@ -61,7 +54,5 @@ namespace MoreShortswords.Content.Projectiles
                 target.AddBuff(BuffID.Bleeding, 500);
             }
         }
-
-
     }
 }

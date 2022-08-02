@@ -3,8 +3,6 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.GameContent.Creative;
 using MoreShortswords.Content.Projectiles;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
 
 namespace MoreShortswords.Content.Weapons
 {
@@ -29,15 +27,13 @@ namespace MoreShortswords.Content.Weapons
 
             Item.knockBack = 5.2f;
 
-            Item.damage = 59;
+            Item.damage = 61;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 0, 35, 15);
 
-            Item.crit = 8;
-                        
-            Item.shootSpeed = 4.7f;            
+            Item.crit = 8;  
 
             Item.noUseGraphic = true;
             Item.noMelee = true;
@@ -54,20 +50,25 @@ namespace MoreShortswords.Content.Weapons
             if (player.altFunctionUse == 2)
             {
                 Item.shoot = ModContent.ProjectileType<MagicBladeProjectile2>();
+                Item.shootSpeed = 8f;
             }
             else
             {
                 Item.shoot = ModContent.ProjectileType<MagicBladeProjectile>();
+                Item.shootSpeed = 5f;
             }
             return player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile2>()] < 1 && player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile>()] < 1;
         }
-
-
 
         public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ItemID.CobaltBar, 8)
+                .AddIngredient(ItemID.SoulofMight, 8)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.PalladiumBar, 8)
                 .AddIngredient(ItemID.SoulofMight, 8)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();

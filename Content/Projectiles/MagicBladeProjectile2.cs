@@ -31,11 +31,17 @@ namespace MoreShortswords.Content.Projectiles
             int boomDust = Dust.NewDust(Projectile.oldPosition, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan, Projectile.velocity.X * 0.25f, Projectile.velocity.Y * 0.25f, 150, default, 0.50f);
             Main.dust[boomDust].noGravity = true;            
 
-            Player _ = new()
+            Player player = new()
             {
                 heldProj = Projectile.whoAmI,
                 itemRotation = Projectile.rotation
             }; 
+
+            if (player.dead || player.CCed || player.noItems)
+            {
+                Projectile.Kill();
+            }
+
             SetVisualOffsets();
         }
 
@@ -50,7 +56,7 @@ namespace MoreShortswords.Content.Projectiles
 
             if (Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile3>()] < 4 && target.type != NPCID.TargetDummy)
             {
-                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.position, new Vector2(Projectile.velocity.X * -player.direction, -Projectile.velocity.Y), ModContent.ProjectileType<MagicBladeProjectile3>(), 15, 5.5f, player.whoAmI);
+                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.position, new Vector2(Projectile.velocity.X * -player.direction, -Projectile.velocity.Y), ModContent.ProjectileType<MagicBladeProjectile3>(), 25, 5.7f, player.whoAmI);
             }
             
         }

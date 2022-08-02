@@ -25,7 +25,7 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 300;
-            Projectile.ArmorPenetration = 15;
+            Projectile.ArmorPenetration = 30;
             Projectile.alpha = 255;            
         }
 

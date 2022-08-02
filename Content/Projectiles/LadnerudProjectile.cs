@@ -1,5 +1,4 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 
@@ -10,7 +9,9 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.ArmorPenetration = 10;           
+            Projectile.ArmorPenetration = 15;
+            Projectile.width = 48;
+            Projectile.height = 48;
         }
 
         public override void AI()
@@ -36,7 +37,7 @@ namespace MoreShortswords.Content.Projectiles
             {
                 projOwner.AddBuff(BuffID.SwordWhipPlayerBuff, 900);
                 
-            }                      
+            }                     
 
             if (Main.rand.NextBool(3) && !target.HasBuff(BuffID.SwordWhipNPCDebuff))
             {
