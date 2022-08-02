@@ -14,7 +14,7 @@ namespace MoreShortswords.Content.ItemDropRules
 
         public override void OpenVanillaBag(string context, Player player, int arg)
         {
-            var entitySource = player.GetSource_OpenItem(ItemID.EyeOfCthulhuBossBag, "bossBag");
+            var entitySource = player.GetSource_OpenItem(arg, context);
             if (context == "bossBag" && arg == ItemID.BrainOfCthulhuBossBag || arg == ItemID.EaterOfWorldsBossBag)
             {
                 player.QuickSpawnItem(entitySource, ModContent.ItemType<MuramasaShortsword>(), 1); ;
