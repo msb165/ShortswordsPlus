@@ -9,8 +9,8 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.SwordBeam);
-            Projectile.width = 40;
-            Projectile.height = 40;
+            Projectile.width = 48;
+            Projectile.height = 48;
             Projectile.alpha = 0;
         }
 

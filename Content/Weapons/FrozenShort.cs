@@ -57,8 +57,8 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
 			CreateRecipe()
-				.AddIngredient(ItemID.IceBlock, 8)
-				.AddIngredient(ItemID.SnowBlock, 8)
+				.AddIngredient(ItemID.IceBlock, 14)
+				.AddIngredient(ItemID.SnowBlock, 14)
 				.AddTile(TileID.Anvils)
 				.Register();
         }

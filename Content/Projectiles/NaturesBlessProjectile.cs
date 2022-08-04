@@ -44,19 +44,18 @@ namespace MoreShortswords.Content.Projectiles
                 projOwner.AddBuff(BuffID.DryadsWard, 900);
             }
 
-
-            if (Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3) && !target.HasBuff(BuffID.Weak))
             {
                 target.AddBuff(BuffID.Weak, 600);
-                target.AddBuff(BuffID.Slow, 900);
+                target.AddBuff(BuffID.Slow, 600);
                 target.AddBuff(BuffID.DryadsWardDebuff, 600);
-                target.AddBuff(BuffID.Venom, 900);
+                target.AddBuff(BuffID.Venom, 600);
             }
 
        
             if (projOwner.ownedProjectileCounts[ProjectileID.VilethornBase] < 6 && target.type != NPCID.TargetDummy)
             {           
-                int thornProj = Projectile.NewProjectile(target.GetSource_OnHit(target), projOwner.Center, Projectile.velocity*4.5f, ProjectileID.VilethornBase, 65, 4f, player.whoAmI);
+                int thornProj = Projectile.NewProjectile(target.GetSource_OnHit(target), projOwner.Center, Projectile.velocity*4f, ProjectileID.VilethornBase, 65, 4f, player.whoAmI);
                 Main.projectile[thornProj].ArmorPenetration = 80;
                 Main.projectile[thornProj].penetrate = 1;
             }

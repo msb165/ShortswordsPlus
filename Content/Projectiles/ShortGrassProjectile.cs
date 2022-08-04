@@ -14,7 +14,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();       
-            Projectile.ArmorPenetration = 2;
+            Projectile.ArmorPenetration = 3;
         }
 
         public override void AI()
@@ -36,9 +36,9 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            if (Main.rand.NextBool(5))
+            if (Main.rand.NextBool(5) && !target.HasBuff(BuffID.Poisoned))
             {
-                target.AddBuff(BuffID.Poisoned, 420);
+                target.AddBuff(BuffID.Poisoned, Main.rand.Next(300, 500));
             }
         }        
     }

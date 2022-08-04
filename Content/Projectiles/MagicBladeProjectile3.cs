@@ -26,7 +26,7 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.tileCollide = false;
             Projectile.timeLeft = 300;
             Projectile.ArmorPenetration = 30;
-            Projectile.alpha = 255;            
+            Projectile.alpha = 255;
         }
 
         public override void AI()

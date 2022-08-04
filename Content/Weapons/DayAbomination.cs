@@ -23,7 +23,7 @@ namespace MoreShortswords.Content.Weapons
             Item.useTime = 23;
             Item.UseSound = SoundID.Item71;
 
-            Item.damage = 30;
+            Item.damage = 32;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 4.2f;
 

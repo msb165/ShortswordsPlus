@@ -1,6 +1,4 @@
 ﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -13,7 +11,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.ArmorPenetration = 1;
+            Projectile.ArmorPenetration = 3;
         }
 
         public override void AI()

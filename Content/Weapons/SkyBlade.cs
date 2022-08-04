@@ -15,8 +15,8 @@ namespace MoreShortswords.Content.Weapons
 		}
 		public override void SetDefaults()
 		{
-			Item.width = 48;
-			Item.height = 48;
+			Item.width = 56;
+			Item.height = 56;
 
 			Item.useStyle = ItemUseStyleID.Rapier;
 			Item.useAnimation = 12;
@@ -24,8 +24,8 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.UseSound = SoundID.Item1;
 
-			Item.damage = 92;
-			Item.knockBack = 7f;			
+			Item.damage = 102;
+			Item.knockBack = 7.2f;			
 
 			Item.rare = ItemRarityID.LightRed;
 			Item.value = Item.sellPrice(0, 1, 25, 15);
@@ -45,9 +45,8 @@ namespace MoreShortswords.Content.Weapons
 		{
 			CreateRecipe()
 				.AddIngredient(ItemID.BrokenHeroSword, 1)
-				.AddIngredient(ItemID.SoulofLight, 5)
-				.AddIngredient(ItemID.SpectreBar, 5)
-				.AddIngredient(ItemID.Cloud, 5)
+				.AddIngredient(ItemID.SoulofLight, 15)
+				.AddIngredient(ItemID.ChlorophyteBar, 12)
 				.AddTile(TileID.MythrilAnvil)
 				.Register();
 		}

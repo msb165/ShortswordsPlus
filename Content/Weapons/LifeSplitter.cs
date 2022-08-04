@@ -21,7 +21,7 @@ namespace MoreShortswords.Content.Weapons
             Item.UseSound = SoundID.Item1;
             Item.useStyle = ItemUseStyleID.Rapier;
 
-            Item.damage = 82;
+            Item.damage = 84;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.value = Item.sellPrice(0, 1, 13, 25);
@@ -45,7 +45,7 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.ChlorophyteBar, 7)
+                .AddIngredient(ItemID.ChlorophyteBar, 8)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

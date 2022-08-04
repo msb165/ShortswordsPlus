@@ -65,8 +65,7 @@ namespace MoreShortswords.Content.Projectiles
             for (int j = 0; j < 2; j++)
             {
                 Vector2 newVelocity = Vector2.Normalize(Projectile.velocity) * 14f;
-                float[] value = {0f, 3f, -3f};
-                // newVelocity = newVelocity.RotatedBy(Projectile.rotation * MathHelper.PiOver2 - MathHelper.PiOver4);
+                float[] value = {0f, 5f, -5f};
                 newVelocity = newVelocity.RotatedBy(value[j] * MathHelper.PiOver2 - MathHelper.PiOver4);
                 Projectile.NewProjectile(Projectile.GetSource_Death(), new Vector2(Projectile.position.X + (10f * Projectile.direction), Projectile.position.Y + 10f), newVelocity, ModContent.ProjectileType<DayAbominationProjectile3>(), Projectile.damage / 2, 4f, player.whoAmI);
                  

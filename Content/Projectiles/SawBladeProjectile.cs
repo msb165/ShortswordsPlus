@@ -49,7 +49,7 @@ namespace MoreShortswords.Content.Projectiles
                 Projectile.soundDelay = 30;
             }
 
-            if (Main.myPlayer == Projectile.owner && (!player.controlUseItem && !player.noItems && !player.CCed))
+            if (Main.myPlayer == Projectile.owner && !player.controlUseItem && !player.noItems && !player.CCed)
             {
                 Projectile.Kill();
             }      

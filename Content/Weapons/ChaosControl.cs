@@ -40,7 +40,7 @@ namespace MoreShortswords.Content.Weapons
 
         public override bool AltFunctionUse(Player player)
         {
-            return player.ownedProjectileCounts[ModContent.ProjectileType<ChaosControlProjectile3>()] < 4;
+            return player.ownedProjectileCounts[ModContent.ProjectileType<ChaosControlProjectile3>()] < 6;
         }
 
         public override bool CanUseItem(Player player)

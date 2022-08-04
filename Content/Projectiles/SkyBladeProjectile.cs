@@ -1,5 +1,4 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 
@@ -17,6 +16,8 @@ namespace MoreShortswords.Content.Projectiles
         {
             base.SetDefaults();
             Projectile.ArmorPenetration = 25;
+            Projectile.width = 56;
+            Projectile.height = 56;
         }
 
         public override void AI()
@@ -28,18 +29,23 @@ namespace MoreShortswords.Content.Projectiles
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
-        {    
-            target.AddBuff(BuffID.Weak, 100);
+        {
+            if (!target.HasBuff(BuffID.Weak))
+            {
+                target.AddBuff(BuffID.Weak, 100);
+            }
+            
             Player player = new();
-            Player projOwner = Main.player[Projectile.owner];
-            if (projOwner.ownedProjectileCounts[ProjectileID.SkyFracture] < 3 && target.type != NPCID.TargetDummy)
+            
+            if (Main.player[Projectile.owner].ownedProjectileCounts[ProjectileID.SkyFracture] < 6 && target.type != NPCID.TargetDummy)
             {
                 for (int numOfProjs = 0; numOfProjs < 3; numOfProjs++)
                 {
-                    int Newproj = Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.position.X + (Projectile.direction * 200), Projectile.position.Y + Main.rand.Next(-20, 21)), new Vector2((Projectile.velocity.X * 2f) * -player.direction, Projectile.velocity.Y), ProjectileID.SkyFracture, 45, 6f, player.whoAmI);
+                    
+                    int Newproj = Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.position.X + (Projectile.direction * 200), Projectile.position.Y + Main.rand.Next(-40, 41)), new Vector2(Projectile.velocity.X * 2f * -player.direction, Projectile.velocity.Y), ProjectileID.SkyFracture, 45, 6f, player.whoAmI);
+                    Main.projectile[Newproj].velocity = Main.projectile[Newproj].velocity.RotatedByRandom(MathHelper.ToRadians(15f));
                     Main.projectile[Newproj].tileCollide = false;
                     Main.projectile[Newproj].timeLeft = 120;
-
                 }
             }            
         }

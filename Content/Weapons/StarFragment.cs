@@ -10,13 +10,13 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Star Blade");            
+            DisplayName.SetDefault("Star Fragment");            
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
-            Item.width = 20;
-            Item.height = 20;
+            Item.width = 40;
+            Item.height = 40;
 
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.useTime = 20;
@@ -44,7 +44,7 @@ namespace MoreShortswords.Content.Weapons
         {
             CreateRecipe()
                 .AddIngredient(ItemID.FallenStar, 5)
-                .AddIngredient(ItemID.SoulofLight, 4)
+                .AddIngredient(ItemID.SoulofLight, 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

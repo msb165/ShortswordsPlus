@@ -37,14 +37,15 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.AddBuff(BuffID.Confused, 120);
-            target.AddBuff(BuffID.Weak, 240);
-
-
-            Player player = new();
-            Player projOwn = Main.player[Projectile.owner];
+            if (!target.HasBuff(BuffID.Weak) && !target.HasBuff(BuffID.Confused))
+            {
+                target.AddBuff(BuffID.Confused, Main.rand.Next(120, 240));
+                target.AddBuff(BuffID.Weak, Main.rand.Next(240, 400));
+            }
             
-            if (projOwn.ownedProjectileCounts[ModContent.ProjectileType<CosmicBladeProjectile2>()] < 3 && target.type != NPCID.TargetDummy)
+            Player player = new(); 
+            
+            if (Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<CosmicBladeProjectile2>()] < 3 && target.type != NPCID.TargetDummy)
             {
                 int NewProj = Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.Center.X, target.Center.Y), Projectile.velocity * 2f, ModContent.ProjectileType<CosmicBladeProjectile2>(), 50, 8f, player.whoAmI);                    
                 Main.projectile[NewProj].timeLeft = 200;                                           

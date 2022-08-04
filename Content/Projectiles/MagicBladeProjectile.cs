@@ -39,7 +39,7 @@ namespace MoreShortswords.Content.Projectiles
             }
 
             if (target.type != NPCID.TargetDummy) {
-                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity*2f, ProjectileID.ThunderSpearShot, Projectile.damage / 2, 4.5f, player.whoAmI);
+                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity*2f, ProjectileID.ThunderSpearShot, Projectile.damage / 2, 6f, player.whoAmI);
             }
         }
     }

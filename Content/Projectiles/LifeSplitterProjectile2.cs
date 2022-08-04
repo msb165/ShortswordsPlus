@@ -23,13 +23,13 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
+            float detectRadiusMax = 400f;
+            float projSpeed = 20f;
             int fireDust = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.GemEmerald, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1.5f);
             Main.dust[fireDust].noGravity = true;
             Dust secFireDust = Main.dust[fireDust];
             secFireDust.velocity *= 0.4f;
-
-            float detectRadiusMax = 400f;
-            float projSpeed = 20f;
+            
             NPC closestNPC = FindClosestNPC(detectRadiusMax);
             if (closestNPC == null)
             {

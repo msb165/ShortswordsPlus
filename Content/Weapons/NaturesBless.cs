@@ -28,7 +28,7 @@ namespace MoreShortswords.Content.Weapons
             Item.knockBack = 7f;
 
             Item.rare = ItemRarityID.Red;
-            Item.value = Item.sellPrice(0, 1, 55, 15);
+            Item.value = Item.sellPrice(0, 2, 60, 45);
 
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
@@ -45,9 +45,9 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.FragmentVortex, 4)
-                .AddIngredient(ItemID.GrassSeeds, 8)
-                .AddIngredient(ItemID.ChlorophyteBar, 6)
+                .AddIngredient(ItemID.FragmentVortex, 10)
+                .AddIngredient(ItemID.GrassSeeds, 14)
+                .AddIngredient(ItemID.ChlorophyteBar, 12)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }

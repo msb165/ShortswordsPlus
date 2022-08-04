@@ -20,7 +20,7 @@ namespace MoreShortswords.Content.Weapons
             Item.width = 56;
             Item.height = 56;
 
-            Item.damage = 10;
+            Item.damage = 12;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -48,9 +48,9 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.PlatinumBar, 6)
-                .AddIngredient(ItemID.SilverBar, 6)
-                .AddIngredient(ItemID.HellstoneBar, 6)
+                .AddIngredient(ItemID.PlatinumBar, 10)
+                .AddIngredient(ItemID.SilverBar, 10)
+                .AddIngredient(ItemID.HellstoneBar, 13)
                 .AddTile(TileID.Hellforge)
                 .Register();
         }

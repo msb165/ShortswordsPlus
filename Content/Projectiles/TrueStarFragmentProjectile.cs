@@ -1,21 +1,20 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-using System;
 
 namespace MoreShortswords.Content.Projectiles
 {
-    public class StarFragmentProjectile : ShortSwordProjectile
+    public class TrueStarFragmentProjectile : ShortSwordProjectile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Star Fragment");
+            DisplayName.SetDefault("True Star Fragment");
         }
 
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.ArmorPenetration = 6;
+            Projectile.ArmorPenetration = 20;
         }
 
         public override void AI()
@@ -44,8 +43,8 @@ namespace MoreShortswords.Content.Projectiles
             int halfProjHeight = Projectile.height / 2;
 
             DrawOriginOffsetX = 0;
-            DrawOffsetX = -((40 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((40 / 2) - halfProjHeight);
+            DrawOffsetX = -((54 / 2) - halfProjWidth);
+            DrawOriginOffsetY = -((54 / 2) - halfProjHeight);
         }
 
 
@@ -55,27 +54,8 @@ namespace MoreShortswords.Content.Projectiles
             if (!target.HasBuff(BuffID.Weak))
             {
                 target.AddBuff(BuffID.Weak, 200);
-            }
-
-            Player player = new();
+            }           
             
-            if (Main.rand.NextBool(2) && target.type != NPCID.TargetDummy)
-            {
-                for (int numOfStars = 0; numOfStars < 3; numOfStars++)
-                {
-                    Vector2 vector = new(target.position.X + 400, Projectile.position.Y - Main.rand.Next(500, 800));
-                    float num16 = Projectile.position.X + (Projectile.width / 2) - vector.X;
-                    float num17 = Projectile.position.Y + (Projectile.height / 2) - vector.Y;
-                    num16 += Main.rand.Next(-100, 101);
-                    float num18 = (float)Math.Sqrt(num16 * num16 + num17 * num17);
-                    num18 = 25f / num18;
-                    num16 *= num18;
-                    num17 *= num18;                   
-                    
-                    Projectile.NewProjectile(target.GetSource_OnHit(target), vector, new Vector2(num16, num17), ProjectileID.StarCloakStar, 10, 4f, player.whoAmI, 0f, Projectile.position.Y);
-
-                }
-            } 
         }
     }
 }

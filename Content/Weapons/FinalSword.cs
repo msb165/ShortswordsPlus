@@ -28,7 +28,7 @@ namespace MoreShortswords.Content.Weapons
             Item.UseSound = SoundID.Item1;
 
             Item.damage = 120;
-            Item.knockBack = 6.7f;
+            Item.knockBack = 6f;
 
             Item.rare = ItemRarityID.Red;
             Item.value = Item.sellPrice(0, 3, 50, 50);
@@ -62,7 +62,7 @@ namespace MoreShortswords.Content.Weapons
                 .AddIngredient(ModContent.ItemType<CosmicBlade>(), 1)
                 .AddIngredient(ModContent.ItemType<SkyBlade>(), 1)
                 .AddIngredient(ItemID.PlatinumShortsword, 1)                
-                .AddIngredient(ItemID.LunarBar, 10)
+                .AddIngredient(ItemID.LunarBar, 30)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();            
         }

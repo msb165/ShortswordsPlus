@@ -35,9 +35,9 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockBack, bool crit)
         {
-            if (Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3) && !target.HasBuff(BuffID.OnFire))
             {
-                target.AddBuff(BuffID.OnFire, 120, false);
+                target.AddBuff(BuffID.OnFire, 200, false);
             }    
        
         }

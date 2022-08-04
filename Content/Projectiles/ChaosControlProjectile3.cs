@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -52,9 +53,8 @@ namespace MoreShortswords.Content.Projectiles
                 Projectile.velocity = -Projectile.velocity;
             }
    
-            Projectile.ai[0]--;  
-            Projectile.velocity.Y = (float)Math.Sin(MathHelper.Pi / 30f * (Projectile.ai[0] * 0.95)) * MathHelper.TwoPi * 1.25f;     
-
+            Projectile.ai[0]--;
+            Projectile.velocity.Y = (float)Math.Sin(MathHelper.Pi / 30f * (Projectile.ai[0] * 0.95)) * MathHelper.TwoPi * 1.25f;
         }
     }
 }
