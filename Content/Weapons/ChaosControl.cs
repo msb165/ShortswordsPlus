@@ -67,7 +67,7 @@ namespace MoreShortswords.Content.Weapons
         {
             if (player.altFunctionUse != 2)
             { 
-                Projectile.NewProjectile(source, position, velocity * 2f, ModContent.ProjectileType<ChaosControlProjectile2>(), 22, 4f, player.whoAmI);
+                Projectile.NewProjectile(source, position, velocity * 2.25f, ModContent.ProjectileType<ChaosControlProjectile2>(), 22, 4f, player.whoAmI);
             }
             
             return true;

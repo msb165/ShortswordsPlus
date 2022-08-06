@@ -15,6 +15,8 @@ namespace MoreShortswords.Content.Projectiles
         {
             base.SetDefaults();
             Projectile.ArmorPenetration = 20;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
         }
 
         public override void AI()

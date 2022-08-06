@@ -44,23 +44,19 @@ namespace MoreShortswords.Content.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<TrueStarFragmentProjectile2>()] < 12)
+            for (int numOfStars = 0; numOfStars < 4; numOfStars++)
             {
-                for (int numOfStars = 0; numOfStars < 4; numOfStars++)
-                {
-                    Vector2 vector = new(position.X + 400, position.Y - Main.rand.Next(500, 800));
-                    float num16 = position.X + (Item.width / 2) - vector.X;
-                    float num17 = position.Y + (Item.height / 2) - vector.Y;
-                    num16 += Main.rand.Next(-100, 101);
-                    float num18 = (float)Math.Sqrt(num16 * num16 + num17 * num17);
-                    num18 = 25f / num18;
-                    num16 *= num18;
-                    num17 *= num18;
+                Vector2 vector = new(Main.MouseWorld.X + 400, position.Y - Main.rand.Next(500, 800));
+                float num16 = Main.MouseWorld.X + (Item.width / 2) - vector.X;
+                float num17 = position.Y + (Item.height / 2) - vector.Y;
+                num16 += Main.rand.Next(-100, 101);
+                float num18 = (float)Math.Sqrt(num16 * num16 + num17 * num17);
+                num18 = 25f / num18;
+                num16 *= num18;
+                num17 *= num18;
 
-                    Projectile.NewProjectile(source, vector, new Vector2(num16, num17), ModContent.ProjectileType<TrueStarFragmentProjectile2>(), 35, 4.5f, player.whoAmI, 0f, position.Y);
-                }
+                Projectile.NewProjectile(source, vector, new Vector2(num16, num17), ModContent.ProjectileType<TrueStarFragmentProjectile2>(), 40 + Item.damage * (int).1f, 4.5f, player.whoAmI, 0f, position.Y);
             }
-
             return true;
         }
 

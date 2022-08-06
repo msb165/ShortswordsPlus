@@ -6,6 +6,14 @@ namespace MoreShortswords.Content.Projectiles
 {
     public class LadnerudProjectile : ShortSwordProjectile
     {
+        public override string Texture => "MoreShortswords/Content/Projectiles/LadnerudProjectile";
+
+
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
+        }
+
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -18,6 +26,11 @@ namespace MoreShortswords.Content.Projectiles
         {
             base.AI();
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
+
+            if (Main.player[Projectile.owner].ZoneHallow)
+            {
+                Projectile.damage = 59;
+            }
 
             if (!Main.dedServ)
             {
@@ -44,7 +57,6 @@ namespace MoreShortswords.Content.Projectiles
                 target.AddBuff(BuffID.SwordWhipNPCDebuff, 900);
             }            
         }
-
 
         private void SetVisualOffsets()
         {

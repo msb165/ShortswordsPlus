@@ -12,6 +12,7 @@ namespace MoreShortswords.Content.Weapons
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Ladnerud");
+            Tooltip.SetDefault("Deals 5% more damage if standing in the hallowed biome");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;            
         }
 
@@ -26,8 +27,8 @@ namespace MoreShortswords.Content.Weapons
             Item.UseSound = SoundID.Item1;
 
             Item.knockBack = 4.7f;
-
             Item.damage = 57;
+
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.rare = ItemRarityID.Pink;
@@ -41,10 +42,11 @@ namespace MoreShortswords.Content.Weapons
             Item.autoReuse = true;
         }
 
+
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.HallowedBar, 6)
+                .AddIngredient(ItemID.HallowedBar, 7)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

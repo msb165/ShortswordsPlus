@@ -28,6 +28,8 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.scale = 0.8f;
             Projectile.tileCollide = false;
             Projectile.ArmorPenetration = 25;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
         }
 
         public override void AI()
@@ -71,7 +73,7 @@ namespace MoreShortswords.Content.Projectiles
                 Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position, new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f), Main.rand.Next(16, 18));
             }
 
-            Projectile.rotation += (Math.Abs(Projectile.velocity.X) + Math.Abs(Projectile.velocity.Y)) * 0.01f * Projectile.direction;
+            Projectile.rotation += Projectile.velocity.ToRotation() * Projectile.spriteDirection;
         }
 
         public override bool PreDraw(ref Color lightColor)

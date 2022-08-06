@@ -24,7 +24,7 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.UseSound = SoundID.Item1;
 
-			Item.damage = 98;
+			Item.damage = 108;
 			Item.knockBack = 7f;
 
 			Item.rare = ItemRarityID.Yellow;
