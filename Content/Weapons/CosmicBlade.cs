@@ -13,6 +13,7 @@ namespace MoreShortswords.Content.Weapons
 			DisplayName.SetDefault("Cosmic Blade");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
+
 		public override void SetDefaults()
 		{
 			Item.width = 56;
@@ -40,7 +41,6 @@ namespace MoreShortswords.Content.Weapons
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
 			Item.autoReuse = true;
-
 		}
 	}
 }

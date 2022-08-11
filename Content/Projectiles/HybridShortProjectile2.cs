@@ -17,6 +17,13 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
+            NPC target = new();
+
+            if (!target.friendly)
+            {
+                Projectile.velocity = Projectile.velocity.RotatedBy(target.position.X);
+            }
+
         }
     }
 }

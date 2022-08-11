@@ -7,12 +7,12 @@ using MoreShortswords.Content.Projectiles;
 namespace MoreShortswords.Content.Weapons
 {
     public class Ladnerud : ModItem
-    {       
+    {   
         
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Ladnerud");
-            Tooltip.SetDefault("Deals 5% more damage if standing in the hallowed biome");
+            Tooltip.SetDefault("Deals 5% more damage if standing in a hallowed biome\n10% chance of reducing 20% of an enemy's defense if standing in a hallowed biome");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;            
         }
 
@@ -32,7 +32,7 @@ namespace MoreShortswords.Content.Weapons
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.rare = ItemRarityID.Pink;
-            Item.value = Item.sellPrice(0, 0, 35, 15);
+            Item.value = Item.sellPrice(0, 0, 37, 15);
 
             Item.shoot = ModContent.ProjectileType<LadnerudProjectile>();
             Item.shootSpeed = 4.2f;
@@ -42,6 +42,13 @@ namespace MoreShortswords.Content.Weapons
             Item.autoReuse = true;
         }
 
+        public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
+        {
+            if (player.ZoneHallow)
+            {
+                damage *= 1.05f;
+            }
+        }
 
         public override void AddRecipes()
         {

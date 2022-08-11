@@ -19,12 +19,15 @@ namespace MoreShortswords.Content.Projectiles
         {
             Projectile.CloneDefaults(ProjectileID.EmeraldBolt);
             Projectile.tileCollide = false;
+            Projectile.timeLeft = 200;
+            Projectile.penetrate = 1;
         }
 
         public override void AI()
         {
-            float detectRadiusMax = 400f;
+            float detectRadiusMax = 300f;
             float projSpeed = 20f;
+
             int fireDust = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.GemEmerald, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1.5f);
             Main.dust[fireDust].noGravity = true;
             Dust secFireDust = Main.dust[fireDust];

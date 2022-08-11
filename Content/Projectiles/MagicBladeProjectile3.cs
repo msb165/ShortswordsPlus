@@ -13,7 +13,8 @@ namespace MoreShortswords.Content.Projectiles
         
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Deity Spear");           
+            DisplayName.SetDefault("Deity Spear");
+            
         }
 
         public override void SetDefaults()

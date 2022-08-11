@@ -16,7 +16,7 @@ namespace MoreShortswords.Content
             {
               npcLoot.Add(ItemDropRule.ByCondition(condition, ModContent.ItemType<MuramasaShortsword>()));               
             }
-            switch (npc.type)
+            switch(npc.type)
             {
                 case NPCID.GoblinWarrior:
                 case NPCID.GoblinThief:

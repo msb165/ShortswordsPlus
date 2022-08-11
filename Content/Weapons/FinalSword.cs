@@ -31,7 +31,7 @@ namespace MoreShortswords.Content.Weapons
             Item.knockBack = 6f;
 
             Item.rare = ItemRarityID.Red;
-            Item.value = Item.sellPrice(0, 3, 50, 50);
+            Item.value = Item.sellPrice(0, 2, 50, 50);
 
             Item.DamageType = DamageClass.MeleeNoSpeed;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.Audio;
 using Terraria.ModLoader;
@@ -37,7 +36,7 @@ namespace MoreShortswords.Content.Projectiles
             if (Projectile.soundDelay == 0)
             {
                 Projectile.soundDelay = 20 + Main.rand.Next(40);
-                SoundEngine.PlaySound(SoundID.Item9, Projectile.position);
+                SoundEngine.PlaySound(SoundID.Item105, Projectile.position);
             }
 
             if (Projectile.position.Y > Projectile.ai[1])
@@ -64,13 +63,16 @@ namespace MoreShortswords.Content.Projectiles
             }
 
             Projectile.light = 0.9f;
-            if (Main.rand.NextBool(10))
+            if (!Main.dedServ)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Pink, Projectile.velocity.X * 0.5f, Projectile.velocity.Y * 0.5f, 150, default, 1.2f);
-            }
-            if (Main.rand.NextBool(20))
-            {
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position, new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f), Main.rand.Next(16, 18));
+                if (Main.rand.NextBool(10))
+                {
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Pink, Projectile.velocity.X * 0.5f, Projectile.velocity.Y * 0.5f, 150, default, 1.2f);
+                }
+                if (Main.rand.NextBool(20))
+                {
+                    Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position, new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f), Main.rand.Next(16, 18));
+                }
             }
 
             Projectile.rotation += Projectile.velocity.ToRotation() * Projectile.spriteDirection;

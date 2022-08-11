@@ -40,6 +40,7 @@ namespace MoreShortswords.Content.Projectiles
 
             Projectile.rotation += 0.4f * player.direction;           
             Projectile.Center = player.MountedCenter + new Vector2(30f * player.direction, 0f);
+
             Projectile.position.Y = player.position.Y;
             Projectile.spriteDirection = player.direction; 
 

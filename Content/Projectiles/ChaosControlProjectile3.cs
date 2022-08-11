@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -13,6 +14,8 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 8;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
@@ -48,7 +51,7 @@ namespace MoreShortswords.Content.Projectiles
                 Projectile.Kill(); 
             }
 
-            if (Main.rand.NextBool(200))
+            if (Main.rand.NextBool(220))
             {
                 Projectile.velocity = -Projectile.velocity;
             }

@@ -85,9 +85,8 @@ namespace MoreShortswords.Content.Projectiles
             }
             else
             { 
-                float num60 = 15f;
                 float num61 = 3f;
-                Vector2 vector6 = new Vector2(Projectile.position.X + Projectile.width * 0.5f, Projectile.position.Y + Projectile.height * 0.5f);
+                Vector2 vector6 = new (Projectile.position.X + Projectile.width * 0.5f, Projectile.position.Y + Projectile.height * 0.5f);
                 float num62 = Main.player[Projectile.owner].position.X + (Main.player[Projectile.owner].width / 2) - vector6.X;
                 float num63 = Main.player[Projectile.owner].position.Y + (Main.player[Projectile.owner].height / 2) - vector6.Y;
                 float num64 = (float)Math.Sqrt(num62 * num62 + num63 * num63);
@@ -95,7 +94,7 @@ namespace MoreShortswords.Content.Projectiles
                 {
                     Projectile.Kill();
                 }
-                num64 = num60 / num64;
+                num64 = 15f / num64;
                 num62 *= num64;
                 num63 *= num64;
 

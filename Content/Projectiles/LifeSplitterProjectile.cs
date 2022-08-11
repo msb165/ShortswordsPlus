@@ -25,7 +25,7 @@ namespace MoreShortswords.Content.Projectiles
             if (!Main.dedServ)
             {
                 int TestDust = Dust.NewDust(new Vector2(Projectile.position.X + 0.25f, Projectile.position.Y), Projectile.width, Projectile.height, DustID.GemEmerald, Projectile.velocity.X * 0.8f + (Projectile.spriteDirection * 3), Projectile.velocity.Y * 0.2f, 128, default, 1.4f);
-                Main.dust[TestDust].velocity *= 0.2f;
+                Main.dust[TestDust].velocity *= 1.2f;
                 Main.dust[TestDust].noGravity = true;
             }
             SetVisualOffsets();
@@ -44,7 +44,11 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.AddBuff(BuffID.CursedInferno, 120);
+
+            if (!target.HasBuff(BuffID.CursedInferno))
+            {
+                target.AddBuff(BuffID.CursedInferno, 120);
+            }
 
             if (Main.rand.NextBool(4)) 
             {
@@ -53,11 +57,11 @@ namespace MoreShortswords.Content.Projectiles
 
             Player player = new();
 
-            if (Main.rand.NextBool(2) && player.ownedProjectileCounts[ModContent.ProjectileType<LifeSplitterProjectile2>()] < 4 && target.type != NPCID.TargetDummy) 
+            if (Main.rand.NextBool(2) && player.ownedProjectileCounts[ModContent.ProjectileType<LifeSplitterProjectile2>()] < 8 && target.type != NPCID.TargetDummy) 
             {
                 for (int projsToSpawn = 0; projsToSpawn < 4; projsToSpawn++)
                 {
-                    Vector2 vector = new Vector2(target.Center.X + Main.rand.Next(-400, 400), target.Center.Y - Main.rand.Next(600, 800));
+                    Vector2 vector = new (target.Center.X + Main.rand.Next(-400, 400), target.Center.Y - Main.rand.Next(600, 800));
                     float num16 = target.Center.X + (Projectile.width / 2) - vector.X;
                     float num17 = target.Center.Y + (Projectile.height / 2) - vector.Y;
                     num16 += Main.rand.Next(-100, 101);

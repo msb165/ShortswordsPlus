@@ -14,6 +14,7 @@ namespace MoreShortswords.Content.Weapons
             Tooltip.SetDefault("25% chance to inflict weakness on an enemy.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
+
         public override void SetDefaults()
         {
             Item.useTime = 15;
