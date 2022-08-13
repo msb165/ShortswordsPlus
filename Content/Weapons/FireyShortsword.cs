@@ -27,7 +27,7 @@ namespace MoreShortswords.Content.Weapons
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 34, 12);
 
-            Item.damage = 29;
+            Item.damage = 28;
             Item.knockBack = 5f;
 
             Item.DamageType = DamageClass.MeleeNoSpeed;
