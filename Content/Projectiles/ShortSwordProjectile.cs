@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 
+
 namespace MoreShortswords.Content.Projectiles
 {
     public class ShortSwordProjectile : ModProjectile
@@ -17,6 +18,7 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.extraUpdates = 1;            
             Projectile.aiStyle = ProjAIStyleID.ShortSword;
         }
+
 
         public override void AI()
         {

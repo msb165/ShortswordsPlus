@@ -48,9 +48,8 @@ namespace MoreShortswords.Content.Weapons
         {
             if (player.ownedProjectileCounts[ModContent.ProjectileType<BetelgueseProjectile3>()] < 15)
             {
-                Projectile.NewProjectile(source, position, velocity*1.5f, ModContent.ProjectileType<BetelgueseProjectile3>(), Item.damage / 2, 5f, player.whoAmI);
+                Projectile.NewProjectile(source, position, velocity*2f, ModContent.ProjectileType<BetelgueseProjectile3>(), Item.damage / 2, 5f, player.whoAmI);
             }
-
             return true;
         }
 

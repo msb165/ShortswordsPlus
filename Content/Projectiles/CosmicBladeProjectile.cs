@@ -1,7 +1,7 @@
 ﻿using Terraria;
-using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
+using Terraria.GameContent.Drawing;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -42,15 +42,13 @@ namespace MoreShortswords.Content.Projectiles
                 target.AddBuff(BuffID.Confused, Main.rand.Next(120, 240));
                 target.AddBuff(BuffID.Weak, Main.rand.Next(240, 400));
             }
-            
-            Player player = new(); 
-            
-            if (Main.player[Projectile.owner].ownedProjectileCounts[ModContent.ProjectileType<CosmicBladeProjectile2>()] < 3 && target.type != NPCID.TargetDummy)
+
+            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.StellarTune, new ParticleOrchestraSettings
             {
-                int NewProj = Projectile.NewProjectile(target.GetSource_OnHit(target), new Vector2(target.Center.X, target.Center.Y), Projectile.velocity * 2f, ModContent.ProjectileType<CosmicBladeProjectile2>(), 50, 8f, player.whoAmI);                    
-                Main.projectile[NewProj].timeLeft = 200;                                           
-            }
+                PositionInWorld = target.Center
+            });
         }
+
 
         private void SetVisualOffsets()
         {

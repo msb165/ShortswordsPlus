@@ -40,6 +40,8 @@ namespace MoreShortswords.Content.Weapons
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
+
+            ItemID.Sets.ItemsThatAllowRepeatedRightClick[Item.type] = true;
         }
 
         public override void ModifyWeaponDamage(Player player, ref StatModifier damage)

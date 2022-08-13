@@ -3,7 +3,6 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
-using System;
 namespace MoreShortswords.Content.Projectiles
 {
     public class DayAbominationProjectile2 : ModProjectile
@@ -29,7 +28,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            int fireDust = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Pixie, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1.2f);
+            int fireDust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Pixie, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1.2f);
             Main.dust[fireDust].noGravity = true;
             Dust secFireDust = Main.dust[fireDust];
             secFireDust.velocity *= 0.3f;            
@@ -53,7 +52,7 @@ namespace MoreShortswords.Content.Projectiles
             SoundEngine.PlaySound(SoundID.NPCHit3, Projectile.position);
             for (int numOfParticles = 0; numOfParticles < 16; numOfParticles++) 
             { 
-                int dustExplode = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Pixie, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 255, default, 1.2f);
+                int dustExplode = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Pixie, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 255, default, 1.2f);
                 Main.dust[dustExplode].noGravity = true;
                 Dust dustExplodeAlt = Main.dust[dustExplode];
                 dustExplodeAlt.scale *= 1.25f;

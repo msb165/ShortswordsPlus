@@ -25,7 +25,7 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.UseSound = SoundID.Item1;
 
-			Item.damage = 108;
+			Item.damage = 104;
 			Item.knockBack = 7f;
 
 			Item.rare = ItemRarityID.Yellow;
@@ -33,14 +33,32 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.DamageType = DamageClass.MeleeNoSpeed;
 
-			Item.shoot = ModContent.ProjectileType<CosmicBladeProjectile>();
-			Item.shootSpeed = 8f;
-
 			Item.crit = 10;
 
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
 			Item.autoReuse = true;
 		}
-	}
+
+        public override bool CanUseItem(Player player)
+        {
+			if (player.altFunctionUse == 2)
+            {
+				Item.shoot = ModContent.ProjectileType<CosmicBladeProjectile2>();
+				Item.shootSpeed = 16f;
+			}
+            else
+            {
+				Item.shoot = ModContent.ProjectileType<CosmicBladeProjectile>();
+				Item.shootSpeed = 8f;
+			}
+			return true;			
+        }
+
+        public override bool AltFunctionUse(Player player)
+        {
+			return player.ownedProjectileCounts[ModContent.ProjectileType<CosmicBladeProjectile2>()] < 8;
+		}
+
+    }
 }

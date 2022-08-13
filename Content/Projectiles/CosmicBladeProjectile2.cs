@@ -3,7 +3,8 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using System;
-
+using Terraria.Audio;
+using Terraria.GameContent.Drawing;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -17,39 +18,51 @@ namespace MoreShortswords.Content.Projectiles
 		}
 
 		public override void SetDefaults()
-        {
-			Projectile.CloneDefaults(ProjectileID.CrystalVileShardShaft);			
+        {	
+			Projectile.friendly = true;
+			Projectile.ownerHitCheck = true;
+			Projectile.width = 28;
+			Projectile.height = 28;
+			Projectile.penetrate = -1;
+			Projectile.alpha = 0;
+			Projectile.extraUpdates = 1;
+			Projectile.timeLeft = 200;
+			Projectile.aiStyle = 1;
+            Projectile.damage *= (int)0.90;
         }
 
         public override void AI()
         {
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-			Projectile.rotation += 0.06f;
-			if (Projectile.ai[0] == 0f)
-			{								
-				Projectile.alpha = 0;
-				Projectile.ai[0] = 1f;
-				if (Projectile.alpha > 0)
-				{
-					return;
-				}
 
-				if (Projectile.ai[1] == 0f)
-				{
-					Projectile.ai[1] += 1f;
-					Projectile.position += Projectile.velocity * 1f;
-				}
-
-				Projectile.velocity += new Vector2(0.25f, 0.25f);
-				
-				Projectile.alpha += 4;
-				if (Projectile.alpha >= 255)
-				{
-					Projectile.Kill();
-				}
-				
+			if (Main.rand.NextBool(3))
+            {
+				Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.position, Projectile.velocity.RotatedByRandom(15f), ModContent.ProjectileType<CosmicBladeProjectile3>(), Projectile.damage, 0f, Projectile.owner, 0f);
 			}
+
 			SetVisualOffsets();
+		}
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+			ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.StellarTune, new ParticleOrchestraSettings
+			{
+				PositionInWorld = target.Center
+			});
+		}
+
+        public override void Kill(int timeLeft)
+		{
+			SoundEngine.PlaySound(SoundID.NPCHit3, Projectile.position);
+			for (int numOfParticles = 0; numOfParticles < 16; numOfParticles++)
+			{
+				int dustExplode = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1f);
+				Main.dust[dustExplode].noGravity = true;
+				Dust dustExplodeAlt = Main.dust[dustExplode];
+				dustExplodeAlt.scale *= 1.1f;
+				dustExplodeAlt.velocity = Projectile.velocity.RotatedByRandom(15f);
+				Projectile.rotation = Projectile.velocity.ToRotation();
+			}
 		}
 
 		private void SetVisualOffsets()
