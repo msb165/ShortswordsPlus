@@ -10,7 +10,7 @@ namespace MoreShortswords.Content.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Sky Blade");
+			// DisplayName.SetDefault("Sky Blade");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 		public override void SetDefaults()
@@ -24,8 +24,8 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.UseSound = SoundID.Item1;
 
-			Item.damage = 102;
-			Item.knockBack = 7.2f;			
+			Item.damage = 90;
+			Item.knockBack = 7f;			
 
 			Item.rare = ItemRarityID.LightRed;
 			Item.value = Item.sellPrice(0, 1, 25, 15);
@@ -33,7 +33,7 @@ namespace MoreShortswords.Content.Weapons
 			Item.DamageType = DamageClass.MeleeNoSpeed;
 
 			Item.shoot = ModContent.ProjectileType<SkyBladeProjectile>();
-			Item.shootSpeed = 6.2f;
+			Item.shootSpeed = 6f;
 
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
@@ -44,10 +44,11 @@ namespace MoreShortswords.Content.Weapons
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.BrokenHeroSword, 1)
 				.AddIngredient(ItemID.SoulofLight, 15)
-				.AddIngredient(ItemID.ChlorophyteBar, 12)
-				.AddTile(TileID.MythrilAnvil)
+				.AddIngredient(ItemID.LightShard, 1)
+				.AddIngredient(ItemID.Feather, 15)
+				.AddIngredient(ItemID.SpectreBar, 15)
+				.AddTile(TileID.LunarCraftingStation)
 				.Register();
 		}
 	}

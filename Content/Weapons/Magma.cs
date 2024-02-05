@@ -6,34 +6,35 @@ using MoreShortswords.Content.Projectiles;
 
 namespace MoreShortswords.Content.Weapons
 {
-    public class FireyShortsword : ModItem
+    [LegacyName(new string[] { "FieryShort" })]
+    public class Magma : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Molten Shortsword");
-            Tooltip.SetDefault("\"Careful, it's hot!\"");
+            // DisplayName.SetDefault("Magma");
+            // Tooltip.SetDefault("\"Careful, it's hot!\"");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
-            Item.width = 42;
-            Item.height = 42;
+            Item.width = 48;
+            Item.height = 48;
 
             Item.useStyle = ItemUseStyleID.Rapier;
-            Item.useAnimation = 25;
-            Item.useTime = 25;
+            Item.useAnimation = 26;
+            Item.useTime = 26;
             Item.UseSound = SoundID.Item1;
 
             Item.rare = ItemRarityID.Orange;
-            Item.value = Item.sellPrice(0, 0, 34, 12);
+            Item.value = Item.sellPrice(0, 0, 60, 0);
 
-            Item.damage = 28;
+            Item.damage = 30;
             Item.knockBack = 5f;
 
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.shoot = ModContent.ProjectileType<FieryShortProjectile>();
-            Item.shootSpeed = 2.1f;
+            Item.shootSpeed = 3.5f;
 
             Item.noUseGraphic = true;
             Item.noMelee = true;
@@ -43,10 +44,9 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.HellstoneBar, 6)
+                .AddIngredient(ItemID.HellstoneBar, 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
-
     }
 }

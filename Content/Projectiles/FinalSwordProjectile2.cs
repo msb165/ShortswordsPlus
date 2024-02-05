@@ -5,59 +5,26 @@ using Microsoft.Xna.Framework;
 using System;
 using Microsoft.Xna.Framework.Graphics;
 using MoreShortswords.Effects;
+using MoreShortswords.Content.Weapons;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class FinalSwordProjectile2 : ModProjectile
-    {
-     
-        public string[] myStringArray = 
-            {
-            "MoreShortswords/Content/Projectiles/FinalSwordProjectile2", 
-            "MoreShortswords/Content/Projectiles/NaturesBlessProjectile",
-            "MoreShortswords/Content/Projectiles/DayAbominationProjectile",
-            "MoreShortswords/Content/Projectiles/CosmicBladeProjectile",
-            "MoreShortswords/Content/Projectiles/SkyBladeProjectile",
-            $"Terraria/Images/Projectile_{ProjectileID.PlatinumShortswordStab}"
-        };        
+    {       
+        public string[] swordTextureArray = 
+        {
+           "MoreShortswords/Content/Weapons/NaturesBless",
+           "MoreShortswords/Content/Weapons/DayAbomination",
+           "MoreShortswords/Content/Weapons/SkyBlade",
+           "MoreShortswords/Content/Weapons/CosmicBlade",
+           $"Terraria/Images/Projectile_{ProjectileID.PlatinumShortswordStab}"            
+        };
         
-        public override string Texture => myStringArray[Main.rand.Next(0, myStringArray.Length)];
-
-
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
-
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 3;            
-
-            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
-            int startY = frameHeight * Projectile.frame;
-
-            Rectangle sourceRectangle = new (0, startY, texture.Width, frameHeight);
-            Vector2 origin = sourceRectangle.Size() / 2f;
-
-            SpriteEffects spriteEffects = SpriteEffects.None;
-            if (Projectile.direction == -1)
-            {
-                spriteEffects = SpriteEffects.FlipHorizontally;
-            }
-
-            float offsetX = 20f;
-            origin.X = (Projectile.spriteDirection == -1 ? sourceRectangle.Width - offsetX : offsetX);
-
-            Color drawColor = Projectile.GetAlpha(lightColor);
-            
-            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), sourceRectangle, drawColor, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0);
-            default(FinalSwordDrawer).Draw(Projectile);
-            return false;
-        }
-
         public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Apogee");
+        {            
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
-
         public override void SetDefaults()
         {
             Projectile.friendly = true;
@@ -71,8 +38,11 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.ArmorPenetration = 150;
         }
 
+        public Player Owner => Main.player[Projectile.owner];        
         public override void AI()
-        {                    
+        {
+
+
             if (Projectile.ai[0] == 0f)
             {
                 Projectile.ai[1] += 1f;
@@ -85,57 +55,53 @@ namespace MoreShortswords.Content.Projectiles
             }
             else
             { 
-                float num61 = 3f;
-                Vector2 vector6 = new (Projectile.position.X + Projectile.width * 0.5f, Projectile.position.Y + Projectile.height * 0.5f);
-                float num62 = Main.player[Projectile.owner].position.X + (Main.player[Projectile.owner].width / 2) - vector6.X;
-                float num63 = Main.player[Projectile.owner].position.Y + (Main.player[Projectile.owner].height / 2) - vector6.Y;
-                float num64 = (float)Math.Sqrt(num62 * num62 + num63 * num63);
+                float acceleration = 3f;
+                Vector2 playerProjDistance = Owner.Center - Projectile.Center;
+                float num64 = playerProjDistance.Length();
                 if (num64 > 3000f)
                 {
                     Projectile.Kill();
                 }
                 num64 = 15f / num64;
-                num62 *= num64;
-                num63 *= num64;
+                playerProjDistance.X *= num64;
+                playerProjDistance.Y *= num64;
 
-                if (Projectile.velocity.X < num62)
+                if (Projectile.velocity.X < playerProjDistance.X)
                 {
-                    Projectile.velocity.X += num61;
-                    if (Projectile.velocity.X < 0f && num62 > 0f)
+                    Projectile.velocity.X += acceleration;
+                    if (Projectile.velocity.X < 0f && playerProjDistance.X > 0f)
                     {
-                        Projectile.velocity.X += num61;
+                        Projectile.velocity.X += acceleration;
                     }
                 }
-                else if (Projectile.velocity.X > num62)
+                else if (Projectile.velocity.X > playerProjDistance.X)
                 {
-                    Projectile.velocity.X -= num61;
-                    if (Projectile.velocity.X > 0f && num62 < 0f)
+                    Projectile.velocity.X -= acceleration;
+                    if (Projectile.velocity.X > 0f && playerProjDistance.X < 0f)
                     {
-                        Projectile.velocity.X -= num61;
+                        Projectile.velocity.X -= acceleration;
                     }
                 }
-                if (Projectile.velocity.Y < num63)
+                if (Projectile.velocity.Y < playerProjDistance.Y)
                 {
-                    Projectile.velocity.Y += num61;
-                    if (Projectile.velocity.Y < 0f && num63 > 0f)
+                    Projectile.velocity.Y += acceleration;
+                    if (Projectile.velocity.Y < 0f && playerProjDistance.Y > 0f)
                     {
-                        Projectile.velocity.Y += num61;
+                        Projectile.velocity.Y += acceleration;
                     }
                 }
-                else if (Projectile.velocity.Y > num63)
+                else if (Projectile.velocity.Y > playerProjDistance.Y)
                 {
-                    Projectile.velocity.Y -= num61;
-                    if (Projectile.velocity.Y > 0f && num63 < 0f)
+                    Projectile.velocity.Y -= acceleration;
+                    if (Projectile.velocity.Y > 0f && playerProjDistance.Y < 0f)
                     {
-                        Projectile.velocity.Y -= num61;
+                        Projectile.velocity.Y -= acceleration;
                     }
                 }
 
                 if (Main.myPlayer == Projectile.owner)
                 {
-                    Rectangle rectangle = new ((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height);
-                    Rectangle value = new ((int)Main.player[Projectile.owner].position.X, (int)Main.player[Projectile.owner].position.Y, Main.player[Projectile.owner].width, Main.player[Projectile.owner].height);
-                    if (rectangle.Intersects(value))
+                    if (Projectile.Hitbox.Intersects(Owner.Hitbox))
                     {
                         Projectile.Kill();
                     }
@@ -144,6 +110,40 @@ namespace MoreShortswords.Content.Projectiles
 
             Lighting.AddLight(Projectile.position, 0.25f, 0.25f, 0.25f);
             Projectile.rotation += 0.4f * Projectile.direction;
+        }
+
+        private bool _initialized = false;
+        public override bool PreDraw(ref Color lightColor)
+        {
+            string textureString = "MoreShortswords/Content/Projectiles/FinalSwordProjectile2";
+            if (!_initialized)
+            {
+                textureString = swordTextureArray[Main.rand.Next(0, swordTextureArray.Length)];
+                _initialized = true;
+            }
+
+            Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(textureString);
+
+
+            int frameHeight = texture.Height / Main.projFrames[Projectile.type];
+            int startY = frameHeight * Projectile.frame;
+
+            Rectangle sourceRectangle = new(0, startY, texture.Width, frameHeight);
+            Vector2 origin = sourceRectangle.Size() / 2f;
+
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (Projectile.direction == -1)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally;
+            }
+
+            float offsetX = 20f;
+            origin.X = (Projectile.spriteDirection == -1 ? sourceRectangle.Width - offsetX : offsetX);
+
+            Color drawColor = Projectile.GetAlpha(lightColor);
+
+            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), sourceRectangle, drawColor, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0);
+            return false;
         }
     }
 }

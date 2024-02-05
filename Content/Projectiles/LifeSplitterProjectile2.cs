@@ -2,25 +2,30 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using MoreShortswords.Content.Dusts;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class LifeSplitterProjectile2 : ModProjectile
     {
-        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.NightBeam}";
+        public override string Texture => "MoreShortswords/Content/Projectiles/DayAbominationProjectile2";
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Life Splitter Projectile");
+            ProjectileID.Sets.TrailingMode[Type] = 3;
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SetDefaults()
-        {
-            Projectile.CloneDefaults(ProjectileID.EmeraldBolt);
+        {            
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 200;
+            Projectile.timeLeft = 190;
             Projectile.penetrate = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.Size = new(20);
         }
 
         public override void AI()
@@ -28,20 +33,19 @@ namespace MoreShortswords.Content.Projectiles
             float detectRadiusMax = 300f;
             float projSpeed = 20f;
 
-            int fireDust = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.GemEmerald, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1.5f);
-            Main.dust[fireDust].noGravity = true;
-            Dust secFireDust = Main.dust[fireDust];
-            secFireDust.velocity *= 0.4f;
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), Projectile.velocity.X * 0.8f, Projectile.velocity.Y * 0.8f, 0, Color.Green, 1.25f);
             
             NPC closestNPC = FindClosestNPC(detectRadiusMax);
             if (closestNPC == null)
             {
                 return;
             }
-
-            Projectile.velocity = (closestNPC.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+            
+            Projectile.velocity = Vector2.Lerp(Projectile.velocity, (closestNPC.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed, 0.2f);
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
+
+        public override Color? GetAlpha(Color lightColor) => Color.Green with { A = 0 };
 
         public NPC FindClosestNPC(float maxDistance)
         {
@@ -66,5 +70,32 @@ namespace MoreShortswords.Content.Projectiles
             return closestNPC;
         }
 
+        public override bool PreDraw(ref Color lightColor)
+        {
+            float glowScale = 0.5f;
+            SpriteBatch spriteBatch = Main.spriteBatch;
+            Texture2D texture = TextureAssets.Projectile[Type].Value;
+            Texture2D glowTexture = (Texture2D)ModContent.Request<Texture2D>("MoreShortswords/Assets/GlowSphere");
+
+            Vector2 drawOrigin = texture.Size() / 2;
+            Vector2 drawOriginGlow = glowTexture.Size() / 2;
+            Color drawColor = new(64, 255, 27, 0);
+            Color drawColorTrail = drawColor;
+            Color drawColorGlow = drawColor;
+
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
+            {
+                Vector2 drawPosTrail = Projectile.oldPos[i] + drawOrigin - Main.screenPosition;
+
+                drawColorTrail *= 0.75f;
+                drawColorGlow *= 0.5f;
+
+                spriteBatch.Draw(glowTexture, drawPosTrail, glowTexture.Frame(), drawColorGlow, Projectile.rotation, drawOriginGlow, glowScale, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, drawPosTrail, texture.Frame(), drawColorTrail, Projectile.rotation, drawOrigin, Projectile.scale - i / (float)Projectile.oldPos.Length, SpriteEffects.None, 0);
+            }
+
+            spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition, texture.Frame(), drawColor, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
+            return false;
+        }
     }
 }

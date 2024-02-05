@@ -12,8 +12,9 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Frozen Shortsword");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            // DisplayName.SetDefault("Frozen Shortsword");
+			// Tooltip.SetDefault("\"Careful, it's cold!\"\n50% chance of inflicting frostburn.");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 		public override void SetDefaults()
 		{
@@ -26,11 +27,11 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.UseSound = SoundID.Item1;
 
-			Item.damage = 12;
-			Item.knockBack = 4.7f;			
+			Item.damage = 13;
+			Item.knockBack = 4f;			
 
 			Item.rare = ItemRarityID.White;
-			Item.value = Item.sellPrice(0, 0, 80, 15);
+			Item.value = Item.sellPrice(0, 0, 22, 0);
 
 			Item.DamageType = DamageClass.MeleeNoSpeed;
 
@@ -45,11 +46,11 @@ namespace MoreShortswords.Content.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			if (player.ownedProjectileCounts[ProjectileID.NorthPoleSnowflake] < 2)
+			if (player.ownedProjectileCounts[ProjectileID.NorthPoleSnowflake] < 4)
 			{ 
-				int IceProjectile = Projectile.NewProjectile(source, position, velocity * 1.25f, ProjectileID.NorthPoleSnowflake, 2, 3.4f, player.whoAmI);
-				Main.projectile[IceProjectile].timeLeft = 150;
-				Main.projectile[IceProjectile].CritChance = 0;
+				Projectile IceProjectile = Projectile.NewProjectileDirect(source, position, velocity.RotatedByRandom(MathHelper.ToRadians(10f)), ProjectileID.NorthPoleSnowflake, 2, 5f, player.whoAmI);
+                IceProjectile.timeLeft = 150;
+                IceProjectile.CritChance = 3;				
 			}			
 			return true;
         }
@@ -57,8 +58,9 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
 			CreateRecipe()
-				.AddIngredient(ItemID.IceBlock, 14)
-				.AddIngredient(ItemID.SnowBlock, 14)
+				.AddIngredient(ItemID.IceBlock, 20)
+				.AddIngredient(ItemID.SnowBlock, 20)
+				.AddRecipeGroup(RecipeGroupID.IronBar, 15)
 				.AddTile(TileID.Anvils)
 				.Register();
         }

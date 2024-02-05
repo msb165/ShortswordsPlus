@@ -1,1 +1,11 @@
-Shortswords+ is a mod that adds more useful, powerful and interesting shortswords.
+[h1]Shortswords+[/h1]
+
+A mod that adds some brand new shortswords to the game's progression.
+This mod also adds all auto-swing to all shortswords.
+
+[h2]Content[/h2]
+
+[list]
+[*]23 shortswords
+[*]2 accessories
+[/list]

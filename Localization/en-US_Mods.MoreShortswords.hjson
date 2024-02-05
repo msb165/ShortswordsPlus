@@ -1,0 +1,198 @@
+Items: {
+	StrangeStarSword: {
+		DisplayName: Strange Star Sword
+		Tooltip:
+			'''
+			So strange...
+			20% more damage and 20% more attack speed if a shortsword or a spear is equipped
+			Causes stars to fall after taking damage.
+			'''
+	}
+
+	StrangeSword: {
+		DisplayName: Strange Sword
+		Tooltip:
+			'''
+			So strange...
+			10% more damage and 5% more attack speed if using a shortsword or a spear
+			'''
+	}
+
+	Betelguese: {
+		DisplayName: Betelguese
+		Tooltip: ""
+	}
+
+	CactusShort: {
+		DisplayName: Cactus Shortsword
+		Tooltip: Has a chance to poison enemies
+	}
+
+	ChaosControl: {
+		DisplayName: Chaos Control
+		Tooltip: Press right click to throw a tornado.
+	}
+
+	CosmicBlade: {
+		DisplayName: Cosmic Blade
+		Tooltip: Press right click to throw it.
+	}
+
+	DayAbomination: {
+		DisplayName: Daylight's Abomination
+		Tooltip: ""
+	}
+
+	EnchantedDagger: {
+		DisplayName: Spellbind
+		Tooltip: ""
+	}
+
+	FinalSword: {
+		DisplayName: Apogee
+		Tooltip: '''"Say goodbye to death."'''
+	}
+
+	Magma: {
+		DisplayName: Magma
+		Tooltip:
+			'''
+			Careful, it's hot!
+			Creates explosions upon hitting an enemy
+			'''
+	}
+
+	FrozenShort: {
+		DisplayName: Frozen Shortsword
+		Tooltip:
+			'''
+			"Careful, it's cold!"
+			Has a chance of inflicting frostburn on enemies.
+			'''
+	}
+
+	GoblinShort: {
+		DisplayName: Warrior's Shortsword
+		Tooltip: ""
+	}
+
+	HeartRod: {
+		DisplayName: Heart Rod
+		Tooltip: Has a chance to give health after a critical strike.
+	}
+
+	Ladnerud: {
+		DisplayName: Hallowed Shiv
+		Tooltip: Deals more damage if used on a hallowed biome
+	}
+
+	LifeSplitter: {
+		DisplayName: Life Splitter
+		Tooltip:
+			'''
+			25% chance to inflict weakness on an enemy.
+			Summons green bolts upon hitting an enemy.		
+			'''
+	}
+
+	MagicBlade: {
+		DisplayName: Deity Spear
+		Tooltip: Press right click to throw it.
+	}
+
+	Moonlight: {
+		DisplayName: Moonlight
+		Tooltip: ""
+	}
+
+	NaturesBless: {
+		DisplayName: Nature's Bless
+		Tooltip: ""
+	}
+
+	SawBlade: {
+		DisplayName: Saw Blade
+		Tooltip: ""
+	}
+
+	ShortswordOfGrass: {
+		DisplayName: Grassy Shiv
+		Tooltip: 20% chance of inflicting poison on an enemy.
+	}
+
+	SkyBlade: {
+		DisplayName: Sky Blade
+		Tooltip: ""
+	}
+
+	StarFragment: {
+		DisplayName: Star Fragment
+		Tooltip: Summons stars upon hitting an enemy
+	}
+
+	TriangleSword: {
+		DisplayName: Killer's Kunai
+		Tooltip: 33% chance to inflict weakness and bleeding on an enemy.
+	}
+
+	TrueStarFragment: {
+		DisplayName: Skies' Rage
+		Tooltip: Summons a lot of stars upon hitting an enemy
+	}
+
+	Destroyer: {
+		DisplayName: Destroyer
+		Tooltip: ""
+	}
+}
+
+Projectiles: {
+	BetelgueseProjectile.DisplayName: Betelguese
+	BetelgueseProjectile2.DisplayName: Betelguese
+	BetelgueseProjectile3.DisplayName: Betelguese
+	CactusShortProjectile.DisplayName: Cactus Shortsword
+	ChaosControlProjectile.DisplayName: Chaos Control
+	ChaosControlProjectile2.DisplayName: Chaos Control
+	ChaosControlProjectile3.DisplayName: Chaos Control
+	CosmicBladeProjectile.DisplayName: Cosmic Blade
+	CosmicBladeProjectile2.DisplayName: Cosmic Blade
+	CosmicBladeProjectile3.DisplayName: Cosmic Laser
+	DayAbominationProjectile.DisplayName: Daylight's Abomination
+	DayAbominationProjectile2.DisplayName: Daylight's Abomination
+	DayAbominationProjectile3.DisplayName: Daylight's Abomination
+	EnchantedDaggerProjectile.DisplayName: Enchanted Dagger
+	FieryShortProjectile.DisplayName: Molten Shortsword
+	FinalSwordProjectile.DisplayName: Apogee
+	FinalSwordProjectile2.DisplayName: Apogee
+	FrozenShortProjectile.DisplayName: Frozen Shortsword
+	GoblinShortProjectile.DisplayName: Warrior's Shortsword
+	HeartRodProjectile.DisplayName: Heart Rod
+	HybridShortProjectile.DisplayName: Destroyer
+	HybridShortProjectile2.DisplayName: Destroyer
+	LadnerudProjectile.DisplayName: Hallowed Shiv
+	LadnerudProjectile2.DisplayName: Hallowed Shiv
+	LifeSplitterProjectile.DisplayName: Life Splitter
+	LifeSplitterProjectile2.DisplayName: Life Splitter
+	MagicBladeProjectile.DisplayName: Deity Spear
+	MagicBladeProjectile2.DisplayName: Deity Spear
+	MagicBladeProjectile3.DisplayName: Deity Spear
+	MuraShortProjectile.DisplayName: Moonlight
+	NaturesBlessProjectile.DisplayName: Nature's Bless
+	SawBladeProjectile.DisplayName: Saw Blade
+	ShortGrassProjectile.DisplayName: Grass Blade
+	ShortSwordProjectile.DisplayName: Shortsword
+	SkyBladeProjectile.DisplayName: Sky Blade
+	SkyBladeProjectile2.DisplayName: Sky Blade
+	StarFragmentProjectile.DisplayName: Star Fragment
+	TriangleSwordProjectile.DisplayName: Killer's Kunai
+	TrueStarFragmentProjectile.DisplayName: True Star Fragment
+	TrueStarFragmentProjectile2.DisplayName: True Star Fragment
+	MoonlightProjectile.DisplayName: Moonlight Projectile
+}
+
+Buffs: {
+	ProjectileSicknessDebuff: {
+		DisplayName: Projectile Sickness Debuff
+		Description: Mods.MoreShortswords.Buffs.ProjectileSicknessDebuff.Description
+	}
+}

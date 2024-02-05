@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using MoreShortswords.Content.Weapons;
+using Terraria.GameContent.ItemDropRules;
 
 namespace MoreShortswords.Content.ItemDropRules
 {
@@ -12,14 +13,12 @@ namespace MoreShortswords.Content.ItemDropRules
             return item.type == ItemID.BrainOfCthulhuBossBag || item.type == ItemID.EaterOfWorldsBossBag;
         }
 
-        public override void OpenVanillaBag(string context, Player player, int arg)
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
-            var entitySource = player.GetSource_OpenItem(arg, context);
-            if (context == "bossBag" && arg == ItemID.BrainOfCthulhuBossBag || arg == ItemID.EaterOfWorldsBossBag)
+            if (item.type == ItemID.BrainOfCthulhuBossBag || item.type == ItemID.EaterOfWorldsBossBag)
             {
-                player.QuickSpawnItem(entitySource, ModContent.ItemType<MuramasaShortsword>(), 1); ;
-            }            
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Moonlight>(), 1, 1, 1));
+            }
         }
-
     }
 }

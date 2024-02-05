@@ -1,14 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using MoreShortswords.Content.Weapons;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class ChaosControlProjectile : ShortSwordProjectile
     {
+        public override string Texture => ModContent.GetInstance<ChaosControl>().Texture;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chaos Control");
+            // DisplayName.SetDefault("Chaos Control");
         }
 
         public override void SetDefaults()
@@ -25,7 +28,7 @@ namespace MoreShortswords.Content.Projectiles
             SetVisualOffsets();
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!target.HasBuff(BuffID.Confused) && !target.HasBuff(BuffID.Weak))
             {

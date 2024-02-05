@@ -2,57 +2,63 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-
+using MoreShortswords.Content.Weapons;
 
 namespace MoreShortswords.Content.Projectiles
 {
-    public class DayAbominationProjectile : ModProjectile
+    public class DayAbominationProjectile : ShortSwordProjectile
     {
-        protected virtual float HoldoutRangeMin => 40f;
-        protected virtual float HoldoutRangeMax => 80f;
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Daylight's Abomination");
-        }
+        public override string Texture => ModContent.GetInstance<DayAbomination>().Texture;
 
         public override void SetDefaults()
         {
-            Projectile.CloneDefaults(ProjectileID.Spear);            
+            base.SetDefaults();
+            Projectile.Size = new(52);
+            Projectile.friendly = true;
         }
 
-        public override bool PreAI()
-        {           
-            base.PreAI();
-
-            Player player = Main.player[Projectile.owner];
-            int duration = player.itemAnimationMax;
-            player.heldProj = Projectile.whoAmI;
-                      
-            Projectile.velocity = Vector2.Normalize(Projectile.velocity);
-
-            float halfDuration = duration / 2, progress;
-
-            if (Projectile.timeLeft > duration)
-            {
-                Projectile.timeLeft = duration;
-            }
-
-            progress = Projectile.timeLeft < halfDuration ? Projectile.timeLeft / halfDuration : (duration - Projectile.timeLeft) / halfDuration;
-
-            Projectile.Center = player.MountedCenter + Vector2.SmoothStep(Projectile.velocity * HoldoutRangeMin, Projectile.velocity * HoldoutRangeMax, progress);
-            Projectile.rotation = Projectile.rotation * Projectile.spriteDirection + MathHelper.ToRadians(90f);
-           
-            return false;
+        public override void AI()
+        {
+            base.AI();            
+            SetVisualOffsets();
         }
 
+        private void SetVisualOffsets()
+        {
+            int halfProjWidth = Projectile.width / 2;
+            int halfProjHeight = Projectile.height / 2;
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+            DrawOriginOffsetX = 0;
+            DrawOffsetX = -((52 / 2) - halfProjWidth);
+            DrawOriginOffsetY = -((52 / 2) - halfProjHeight);
+        }
+        public Player Owner => Main.player[Projectile.owner];
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.NextBool(3)) 
             {
                 target.AddBuff(BuffID.Bleeding, 500);
             }
+
+            if (Owner.GetModPlayer<MoreShortPlayer>().swordTimer == 0)
+            {
+                Owner.GetModPlayer<MoreShortPlayer>().swordTimer = 20;
+            }
+            else
+            {
+                return;
+            }
+
+            Vector2 newV = Main.rand.NextVector2CircularEdge(400f, 400f);
+            if (newV.Y < 0f)
+            {
+                newV.Y *= -1f;
+            }
+            newV.Y += 100f;
+            Vector2 Vvector = newV.SafeNormalize(Vector2.UnitY) * 6f;
+
+            Projectile.NewProjectile(target.GetSource_OnHit(target), target.position - Vvector * 20f, Vvector * 2f, ModContent.ProjectileType<DayAbominationProjectile2>(), (int)(damageDone * 0.75), 0f, Owner.whoAmI, 0f, 0f);
         }
     }
 }

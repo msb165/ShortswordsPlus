@@ -19,7 +19,6 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.aiStyle = ProjAIStyleID.ShortSword;
         }
 
-
         public override void AI()
         {
             base.AI();

@@ -9,12 +9,10 @@ namespace MoreShortswords.Content.Projectiles
 {
     public class BetelgueseProjectile2 : ModProjectile
     {
-        public override string Texture => "MoreShortswords/Content/Projectiles/StarFragmentProjectile";
+        public override string Texture => "MoreShortswords/Content/Projectiles/ShortSwordProjectile";
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Betelguese");
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
@@ -40,7 +38,7 @@ namespace MoreShortswords.Content.Projectiles
             {
                 return;
             }
-            Projectile.velocity = (closestNPC.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed;
+            Projectile.velocity = Vector2.Lerp(Projectile.velocity, (closestNPC.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed, 0.2f);
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -62,7 +60,7 @@ namespace MoreShortswords.Content.Projectiles
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 
-            Vector2 drawOrigin = new(trailFire.Width / 2, trailFire.Height / 2);
+            Vector2 drawOrigin = trailFire.Size() / 2f;
             for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
                 float num = 8 - i;

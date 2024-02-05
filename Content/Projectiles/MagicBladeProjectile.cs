@@ -1,10 +1,13 @@
-﻿using Terraria;
+﻿using MoreShortswords.Content.Weapons;
+using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class MagicBladeProjectile : ShortSwordProjectile
     {
+        public override string Texture => ModContent.GetInstance<MagicBlade>().Texture;
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -15,8 +18,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            base.AI();
-            
+            base.AI();            
             SetVisualOffsets();
         }
 
@@ -30,16 +32,16 @@ namespace MoreShortswords.Content.Projectiles
             DrawOriginOffsetY = -((50 / 2) - halfProjHeight);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
-        {
-            Player player = new();
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {            
             if (!target.HasBuff(BuffID.Bleeding))
             {
                 target.AddBuff(BuffID.Bleeding, 300);
             }
 
-            if (target.type != NPCID.TargetDummy) {
-                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity*2f, ProjectileID.ThunderSpearShot, Projectile.damage / 2, 6f, player.whoAmI);
+            if (!target.immortal && !target.SpawnedFromStatue && !NPCID.Sets.CountsAsCritter[target.type]) 
+            {
+                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity*2f, ProjectileID.ThunderSpearShot, Projectile.damage / 2, 6f, Projectile.owner);
             }
         }
     }

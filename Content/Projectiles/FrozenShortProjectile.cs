@@ -1,16 +1,14 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
-
+using Terraria.ModLoader;
+using MoreShortswords.Content.Weapons;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class FrozenShortProjectile : ShortSwordProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Frozen Shortsword");
-        }
+        public override string Texture => ModContent.GetInstance<FrozenShort>().Texture;
 
         public override void SetDefaults()
         {
@@ -33,7 +31,15 @@ namespace MoreShortswords.Content.Projectiles
             }
 
             SetVisualOffsets();
-        }        
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Main.rand.NextBool(5) && !target.HasBuff(BuffID.Frostburn) && !target.immortal && !NPCID.Sets.CountsAsCritter[target.type])
+            {
+                target.AddBuff(BuffID.Frostburn, 300);
+            }
+        }
 
         private void SetVisualOffsets()
         {

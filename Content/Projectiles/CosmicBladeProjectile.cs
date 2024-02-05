@@ -2,23 +2,23 @@
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.Drawing;
+using MoreShortswords.Content.Weapons;
+using Terraria.ModLoader;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class CosmicBladeProjectile : ShortSwordProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Cosmic Blade");
-        }
+        public override string Texture => ModContent.GetInstance<CosmicBlade>().Texture;
 
         public override void SetDefaults()
         {
             base.SetDefaults();
             Projectile.ArmorPenetration = 25;
-            Projectile.tileCollide = false;            
+            Projectile.tileCollide = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 17;
         }
-
         public override void AI()
         {
             base.AI();          
@@ -34,22 +34,19 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
             SetVisualOffsets();
         }
-
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!target.HasBuff(BuffID.Weak) && !target.HasBuff(BuffID.Confused))
             {
-                target.AddBuff(BuffID.Confused, Main.rand.Next(120, 240));
-                target.AddBuff(BuffID.Weak, Main.rand.Next(240, 400));
+                target.AddBuff(BuffID.Confused, Main.rand.Next(200, 300));
+                target.AddBuff(BuffID.Weak, Main.rand.Next(300, 400));
             }
 
-            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.StellarTune, new ParticleOrchestraSettings
+            ParticleOrchestrator.RequestParticleSpawn(true, ParticleOrchestraType.StellarTune, new ParticleOrchestraSettings
             {
                 PositionInWorld = target.Center
             });
         }
-
-
         private void SetVisualOffsets()
         {
             int halfProjWidth = Projectile.width / 2;

@@ -10,7 +10,6 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nature's Bless");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -19,36 +18,37 @@ namespace MoreShortswords.Content.Weapons
             Item.height = 64;
 
             Item.useStyle = ItemUseStyleID.Rapier;
-            Item.useAnimation = 9;
-            Item.useTime = 9;
+            Item.useAnimation = 10;
+            Item.useTime = 10;
 
             Item.UseSound = SoundID.Item1;
 
-            Item.damage = 107;
+            Item.damage = 100;
             Item.knockBack = 7f;
 
-            Item.rare = ItemRarityID.Red;
-            Item.value = Item.sellPrice(0, 2, 60, 45);
+            Item.rare = ItemRarityID.Yellow;
+            Item.value = Item.sellPrice(0, 2, 25, 0);
 
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.shoot = ModContent.ProjectileType<NaturesBlessProjectile>();
-            Item.shootSpeed = 8.6f;
+            Item.shootSpeed = 6f;
 
-            Item.crit = 12;
+            Item.crit = 8;
 
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
+            Item.ArmorPenetration = 12;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.FragmentVortex, 10)
-                .AddIngredient(ItemID.GrassSeeds, 14)
-                .AddIngredient(ItemID.ChlorophyteBar, 12)
-                .AddTile(TileID.LunarCraftingStation)
+                .AddIngredient(ItemID.SunStone, 1)
+                .AddIngredient(ItemID.GrassSeeds, 20)
+                .AddIngredient(ItemID.ChlorophyteBar, 15)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

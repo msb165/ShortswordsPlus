@@ -10,7 +10,7 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Star Fragment");            
+            // DisplayName.SetDefault("Star Fragment");            
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -23,14 +23,14 @@ namespace MoreShortswords.Content.Weapons
             Item.useAnimation = 20;
             Item.UseSound = SoundID.Item1;
 
-            Item.damage = 55;
+            Item.damage = 56;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.rare = ItemRarityID.LightRed;
-            Item.value = Item.sellPrice(0, 0, 80, 15);
+            Item.value = Item.sellPrice(0, 0, 90, 15);
 
             Item.shoot = ModContent.ProjectileType<StarFragmentProjectile>();
-            Item.shootSpeed = 4f;
+            Item.shootSpeed = 4.5f;
 
             Item.knockBack = 4.7f;
 
@@ -43,9 +43,9 @@ namespace MoreShortswords.Content.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.FallenStar, 5)
+                .AddIngredient(ItemID.FallenStar, 12)
                 .AddIngredient(ItemID.SoulofLight, 8)
-                .AddTile(TileID.Anvils)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

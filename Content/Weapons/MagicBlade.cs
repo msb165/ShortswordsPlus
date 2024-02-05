@@ -3,6 +3,8 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.GameContent.Creative;
 using MoreShortswords.Content.Projectiles;
+using Terraria.DataStructures;
+using Microsoft.Xna.Framework;
 
 namespace MoreShortswords.Content.Weapons
 {
@@ -10,8 +12,8 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Deity Spear");
-            Tooltip.SetDefault("Press right click to throw it.");
+            // DisplayName.SetDefault("Deity Spear");
+            // Tooltip.SetDefault("Press right click to throw it.\n You can throw 2 at the same time.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -27,49 +29,50 @@ namespace MoreShortswords.Content.Weapons
 
             Item.knockBack = 5.2f;
 
-            Item.damage = 61;
+            Item.damage = 40;
             Item.DamageType = DamageClass.MeleeNoSpeed;
 
-            Item.rare = ItemRarityID.Pink;
-            Item.value = Item.sellPrice(0, 0, 35, 15);
+            Item.shoot = ModContent.ProjectileType<MagicBladeProjectile>();
+            Item.shootSpeed = 4.2f;
 
-            Item.crit = 8;  
+            Item.rare = ItemRarityID.Pink;
+            Item.value = Item.sellPrice(0, 1, 80, 0);
+            Item.ArmorPenetration = 10;
+
+            Item.crit = 4;  
 
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
         }
 
-        public override bool AltFunctionUse(Player player)
-        {                     
+        public override bool CanUseItem(Player player)
+        {
             return player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile2>()] < 1;
         }
 
-        public override bool CanUseItem(Player player)
+        private int shootCounter;
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.altFunctionUse == 2)
+            shootCounter++;
+            if (shootCounter == 3)
             {
-                Item.shoot = ModContent.ProjectileType<MagicBladeProjectile2>();
-                Item.shootSpeed = 8f;
+                shootCounter = 0;
+                Projectile.NewProjectile(source, position, velocity * 1.25f, ModContent.ProjectileType<MagicBladeProjectile2>(), (int)(damage * 1.5f), knockback, player.whoAmI);
             }
-            else
-            {
-                Item.shoot = ModContent.ProjectileType<MagicBladeProjectile>();
-                Item.shootSpeed = 5f;
-            }
-            return player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile2>()] < 1 && player.ownedProjectileCounts[ModContent.ProjectileType<MagicBladeProjectile>()] < 1;
+            return true;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.CobaltBar, 8)
-                .AddIngredient(ItemID.SoulofMight, 8)
+                .AddIngredient(ItemID.CobaltBar, 10)
+                .AddIngredient(ItemID.EnchantedBoomerang, 1)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
             CreateRecipe()
-                .AddIngredient(ItemID.PalladiumBar, 8)
-                .AddIngredient(ItemID.SoulofMight, 8)
+                .AddIngredient(ItemID.PalladiumBar, 10)
+                .AddIngredient(ItemID.EnchantedBoomerang, 1)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

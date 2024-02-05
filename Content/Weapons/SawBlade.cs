@@ -11,7 +11,7 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Saw Blade");
+            // DisplayName.SetDefault("Saw Blade");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,7 +25,7 @@ namespace MoreShortswords.Content.Weapons
 
             Item.useStyle = ItemUseStyleID.Shoot;
 
-            Item.value = Item.sellPrice(0, 0, 15, 9);
+            Item.value = Item.sellPrice(0, 1, 50, 0);
             Item.rare = ItemRarityID.Blue;         
 
             Item.useTime = 10;

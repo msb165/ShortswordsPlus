@@ -4,15 +4,14 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria.Audio;
+using MoreShortswords.Content.Weapons;
 
 namespace MoreShortswords.Content.Projectiles
 {
     internal class FinalSwordProjectile : ShortSwordProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Apogee");           
-        }
+        public override string Texture => ModContent.GetInstance<FinalSword>().Texture;
+
 
         public override void SetDefaults()
         {
@@ -25,7 +24,7 @@ namespace MoreShortswords.Content.Projectiles
             base.AI();
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 15;            
+            Projectile.localNPCHitCooldown = 16;            
             SetVisualOffsets();
         }
 
@@ -39,7 +38,7 @@ namespace MoreShortswords.Content.Projectiles
             DrawOriginOffsetY = -((100 / 2) - halfProjHeight);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Weak, 900);
         }

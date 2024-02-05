@@ -2,20 +2,20 @@
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.Drawing;
+using MoreShortswords.Content.Weapons;
+using Terraria.ModLoader;
+using MoreShortswords.Content.Dusts;
 
 namespace MoreShortswords.Content.Projectiles
 {
     public class LadnerudProjectile : ShortSwordProjectile
     {
-        public override string Texture => "MoreShortswords/Content/Projectiles/LadnerudProjectile";
-        
+        public override string Texture => ModContent.GetInstance<Ladnerud>().Texture;
 
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.ArmorPenetration = 15;
-            Projectile.width = 48;
-            Projectile.height = 48;
+            Projectile.Size = new(48);    
         }
 
         public override void AI()
@@ -23,40 +23,25 @@ namespace MoreShortswords.Content.Projectiles
             base.AI();
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
 
-            if (!Main.dedServ)
+            if (Main.rand.NextBool(3))
             {
-                int TestDust = Dust.NewDust(new Vector2(Projectile.position.X + 0.3f, Projectile.position.Y), Projectile.width, Projectile.height, DustID.HallowedWeapons, Projectile.velocity.X * 0.8f + (Projectile.spriteDirection * 3), Projectile.velocity.Y * 0.2f, 128, default, 1.5f);
-                Main.dust[TestDust].velocity *= 0.25f;
-                Main.dust[TestDust].noGravity = true;
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), Projectile.velocity.X * 0.8f, Projectile.velocity.Y * 0.8f, 0, Color.Gold, 1f);
             }
 
             SetVisualOffsets();
         }
-
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        Player ProjOwner => Main.player[Projectile.owner];
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Player projOwner = Main.player[Projectile.owner];  
-
-            ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Keybrand, new ParticleOrchestraSettings
+            ParticleOrchestrator.RequestParticleSpawn(true, ParticleOrchestraType.Keybrand, new ParticleOrchestraSettings
             {
                 PositionInWorld = target.Center
-            }, projOwner.whoAmI);     
+            }, ProjOwner.whoAmI);     
             
             if (Main.player[Projectile.owner].ZoneHallow && Main.rand.NextBool(10) && target.defense > 12)
             {
-                target.defense -= (int)(target.defense * 0.20f);
-            }
-
-            if (!projOwner.HasBuff(BuffID.SwordWhipPlayerBuff))
-            {
-                projOwner.AddBuff(BuffID.SwordWhipPlayerBuff, 800);
-                
-            }                     
-
-            if (Main.rand.NextBool(4) && !target.HasBuff(BuffID.SwordWhipNPCDebuff))
-            {
-                target.AddBuff(BuffID.SwordWhipNPCDebuff, 800);
-            }            
+                target.defense *= (int)(target.defense * 0.80f);
+            }                
         }
 
 

@@ -11,11 +11,6 @@ namespace MoreShortswords.Content.Projectiles
     {
 		public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.RainbowCrystalExplosion}";
 
-        public override void SetStaticDefaults()
-        {
-			DisplayName.SetDefault("Cosmic Laser");
-		}
-
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -32,16 +27,14 @@ namespace MoreShortswords.Content.Projectiles
             base.AI();
 
 			Projectile.localAI[0] += 1f;
-			if (Projectile.localAI[0] % 3f == 0)
+			if (Projectile.localAI[0] % 2f == 0)
 			{
-                if (Main.rand.NextBool(5))
+                if (Main.rand.NextBool(2))
                 {
-					Vector2 vector34 = Projectile.Center;
-					vector34 -= Projectile.velocity;
-					int num369 = Dust.NewDust(vector34, 1, 1, DustID.DungeonSpirit, Projectile.oldVelocity.X, Projectile.velocity.Y);
-					Main.dust[num369].noGravity = true;
-					Main.dust[num369].velocity *= 0.3f;
-					Main.dust[num369].scale = Main.rand.Next(70, 110) * 0.013f;
+					Dust dungeonDust = Main.dust[Dust.NewDust(Projectile.position, 10, 10, DustID.DungeonSpirit, Projectile.oldVelocity.X, Projectile.velocity.Y)];
+					dungeonDust.position = Projectile.Center;
+                    dungeonDust.noGravity = true;
+					dungeonDust.velocity = Vector2.Zero;					
 				}
 			}
 

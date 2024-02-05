@@ -6,11 +6,12 @@ using Terraria.GameContent.Creative;
 
 namespace MoreShortswords.Content.Weapons
 {
-    public class MuramasaShortsword : ModItem
+    [LegacyName(new string[] { "MuraShort" })]
+    public class Moonlight : ModItem
     {
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Moonlight");
+			// DisplayName.SetDefault("Moonlight");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
@@ -25,21 +26,22 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.UseSound = SoundID.Item1;
 
-			Item.damage = 15;
-			Item.knockBack = 2.5f;			
+			Item.damage = 20;
+			Item.knockBack = 4f;			
 
 			Item.rare = ItemRarityID.Orange;
-			Item.value = Item.sellPrice(0, 1, 75, 0);
+			Item.value = Item.sellPrice(0, 1, 0, 0);
 
 			Item.DamageType = DamageClass.MeleeNoSpeed;
 
-			Item.shoot = ModContent.ProjectileType<MuraShortProjectile>();
-			Item.shootSpeed = 2.1f;
+			Item.shoot = ModContent.ProjectileType<MoonlightProjectile>();
+			Item.shootSpeed = 3f;
 
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
 			Item.autoReuse = true;
-			
+
+			Item.ArmorPenetration = 8;
 		}
 
     }

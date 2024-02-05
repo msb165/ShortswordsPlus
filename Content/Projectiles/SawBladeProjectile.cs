@@ -9,11 +9,6 @@ namespace MoreShortswords.Content.Projectiles
 {
     public class SawBladeProjectile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Saw Blade"); 
-        }
-
         public override void SetDefaults()
         {          
             Projectile.friendly = true;
@@ -27,22 +22,18 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.height = 52;
             Projectile.hide = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
+            Projectile.localNPCHitCooldown = 29;
         }
 
+        Player Owner => Main.player[Projectile.owner];
+
         public override void AI()
-        {  
-            Player player = Main.player[Projectile.owner];
+        {           
+            Projectile.rotation += 0.4f * Owner.direction;           
+            Projectile.Center = Owner.MountedCenter + new Vector2(32f * Owner.direction, 0f);
 
-            player.itemTime = player.itemAnimation = 2;
-            player.itemRotation = Projectile.rotation;
-            player.heldProj = Projectile.whoAmI;
-
-            Projectile.rotation += 0.4f * player.direction;           
-            Projectile.Center = player.MountedCenter + new Vector2(30f * player.direction, 0f);
-
-            Projectile.position.Y = player.position.Y;
-            Projectile.spriteDirection = player.direction; 
+            Projectile.position.Y = Owner.position.Y;
+            Projectile.spriteDirection = Owner.direction; 
 
             if (Projectile.soundDelay <= 0)
             {
@@ -50,17 +41,21 @@ namespace MoreShortswords.Content.Projectiles
                 Projectile.soundDelay = 30;
             }
 
-            if (Main.myPlayer == Projectile.owner && !player.controlUseItem && !player.noItems && !player.CCed)
+            if (!Owner.controlUseItem && !Owner.noItems && !Owner.CCed || Owner.dead || !Owner.active) 
             {
                 Projectile.Kill();
-            }      
+            }     
+ 
 
-            if (player.dead || !player.active)
-            {
-                Projectile.Kill();
-            }
-
+            SetPlayerValues();
             SetVisualOffsets();
+        }
+
+        private void SetPlayerValues()
+        {
+            Owner.itemTime = Owner.itemAnimation = 2;
+            Owner.itemRotation = Projectile.rotation;
+            Owner.heldProj = Projectile.whoAmI;
         }
 
         private void SetVisualOffsets()
