@@ -20,11 +20,10 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            base.AI();            
-            SetVisualOffsets();
+            base.AI();           
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
             int halfProjWidth = Projectile.width / 2;
             int halfProjHeight = Projectile.height / 2;

@@ -17,8 +17,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();           
-            Projectile.width = 40;
-            Projectile.height = 50;
+            Projectile.Size = new(40);
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
         }
@@ -26,9 +25,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-            Projectile.alpha += 50;
-            SetVisualOffsets();
+            Projectile.alpha += 64;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -44,14 +41,9 @@ namespace MoreShortswords.Content.Projectiles
             }
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((50 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((50 / 2) - halfProjHeight);
+            base.SetVisualOffsets();
         }
     }
 }

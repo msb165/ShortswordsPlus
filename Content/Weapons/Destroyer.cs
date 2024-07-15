@@ -12,7 +12,7 @@ namespace MoreShortswords.Content.Weapons
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Destroyer");            
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {

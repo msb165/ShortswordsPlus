@@ -14,7 +14,7 @@ namespace MoreShortswords.Content.Weapons
         {
             // DisplayName.SetDefault("Chaos Control");
             // Tooltip.SetDefault("Press right click to throw a tornado.");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -36,7 +36,7 @@ namespace MoreShortswords.Content.Weapons
             Item.value = Item.sellPrice(0, 0, 40, 0);
 
             Item.shoot = ModContent.ProjectileType<ChaosControlProjectile>();
-            Item.shootSpeed = 5.4f;
+            Item.shootSpeed = 5f;
             Item.useTime = 19;
             Item.useAnimation = 19;
 
@@ -47,11 +47,7 @@ namespace MoreShortswords.Content.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.altFunctionUse != 2)
-            { 
-                Projectile.NewProjectile(source, position, velocity * 2f, ModContent.ProjectileType<ChaosControlProjectile2>(), damage / 2, 4.1f, player.whoAmI);
-            }
-            
+            Projectile.NewProjectile(source, position, velocity * 2f, ModContent.ProjectileType<ChaosControlProjectile2>(), damage, knockback, player.whoAmI);
             return true;
         }
 

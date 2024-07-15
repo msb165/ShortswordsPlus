@@ -9,15 +9,10 @@ namespace MoreShortswords.Content.Weapons
 {
     public class HeartRod : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Heart Rod");
-            // Tooltip.SetDefault("Has a chance to give health if a critical strike is dealt.");
-        }
 
         public override void SetDefaults()
         {
-            Item.width = Item.height = 48;
+            Item.Size = new(48);
             Item.damage = 20;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.crit = 2;
@@ -29,7 +24,7 @@ namespace MoreShortswords.Content.Weapons
 
             Item.rare = ItemRarityID.Green;
             Item.shoot = ModContent.ProjectileType<HeartRodProjectile>();
-            Item.shootSpeed = 2f;
+            Item.shootSpeed = 5f;
             Item.knockBack = 4.5f;
 
             Item.noMelee = true;
@@ -37,22 +32,6 @@ namespace MoreShortswords.Content.Weapons
             Item.autoReuse = true;
             Item.ResearchUnlockCount = 1;
             Item.ArmorPenetration = 5;
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            for (int i = -1; i < 1; i++)
-            {
-                Vector2 spinningPoint = Vector2.Normalize(velocity) * 4f;
-                spinningPoint = spinningPoint.RotatedBy(MathHelper.ToRadians(15 * i));
-                if (spinningPoint.HasNaNs())
-                {
-                    spinningPoint -= Vector2.UnitY;
-                }
-                Projectile.NewProjectile(source, position, spinningPoint, type, damage, knockback, player.whoAmI);
-            }
-
-            return false;
         }
 
         public override void AddRecipes()

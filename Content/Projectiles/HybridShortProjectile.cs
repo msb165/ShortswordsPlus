@@ -21,9 +21,6 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), Projectile.velocity.X * 0.8f, Projectile.velocity.Y * 0.8f, 0, Color.MediumOrchid, 1.5f);
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-            SetVisualOffsets();            
         }
 
         public Player Owner => Main.player[Projectile.owner];
@@ -31,7 +28,7 @@ namespace MoreShortswords.Content.Projectiles
         {
             if (Owner.GetModPlayer<MoreShortPlayer>().swordTimer == 0)
             {
-                Owner.GetModPlayer<MoreShortPlayer>().swordTimer = 20;
+                Owner.GetModPlayer<MoreShortPlayer>().swordTimer = 30;
             }
             else
             {
@@ -52,22 +49,13 @@ namespace MoreShortswords.Content.Projectiles
                 }
                 newV.Y += 100f;
                 Vector2 Vvector = newV.SafeNormalize(Vector2.UnitY) * 6f;
-                Projectile.NewProjectileDirect(target.GetSource_OnHit(target), target.position - Vvector * 20f, Vvector * 1.5f, ModContent.ProjectileType<HybridShortProjectile2>(), (int)(Projectile.damage * 0.75f), 4f, Owner.whoAmI);
+                Projectile.NewProjectileDirect(target.GetSource_OnHit(target), target.Center - Vvector * 20f, Vvector * 1.5f, ModContent.ProjectileType<HybridShortProjectile2>(), (int)(Projectile.damage * 0.75f), 4f, Owner.whoAmI);
             }
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
-            const int halfSprWidth = 48 / 2;
-            const int halfSprHeight = 48 / 2;
-
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -(halfSprWidth - halfProjWidth);
-            DrawOriginOffsetY = -(halfSprHeight - halfProjHeight);
+            base.SetVisualOffsets();
         }
-
     }
 }

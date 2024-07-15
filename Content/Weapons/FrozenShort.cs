@@ -14,30 +14,23 @@ namespace MoreShortswords.Content.Weapons
         {
             // DisplayName.SetDefault("Frozen Shortsword");
 			// Tooltip.SetDefault("\"Careful, it's cold!\"\n50% chance of inflicting frostburn.");
-			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+			Item.ResearchUnlockCount = 1;
         }
 		public override void SetDefaults()
 		{
 			Item.width = 40;
 			Item.height = 40;
-
 			Item.useStyle = ItemUseStyleID.Rapier;
-			Item.useAnimation = 20;
-			Item.useTime = 20;
-
+			Item.useAnimation = 30;
+			Item.useTime = 30;
 			Item.UseSound = SoundID.Item1;
-
 			Item.damage = 13;
-			Item.knockBack = 4f;			
-
+            Item.DamageType = DamageClass.MeleeNoSpeed;
+            Item.knockBack = 4f;		
 			Item.rare = ItemRarityID.White;
 			Item.value = Item.sellPrice(0, 0, 22, 0);
-
-			Item.DamageType = DamageClass.MeleeNoSpeed;
-
 			Item.shoot = ModContent.ProjectileType<FrozenShortProjectile>();
 			Item.shootSpeed = 3f;
-
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
 			Item.autoReuse = true;

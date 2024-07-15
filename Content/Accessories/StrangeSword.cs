@@ -10,7 +10,7 @@ namespace MoreShortswords.Content.Accessories
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Strange Sword");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
             // Tooltip.SetDefault("So strange...\n10% more damage and 5% more attack speed if using a shortsword or spear");
         }
         public override void SetDefaults()

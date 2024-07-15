@@ -13,8 +13,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.width = 98;
-            Projectile.height = 98;
+            Projectile.Size = new(98);
             Projectile.ArmorPenetration = 50;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 20;
@@ -24,26 +23,39 @@ namespace MoreShortswords.Content.Projectiles
         {
             base.AI();
 
-            int StarDust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Gold, Projectile.velocity.X * 0.8f + (Projectile.spriteDirection * 3), Projectile.velocity.Y * 0.2f, 128, default, 1.2f);
-            Main.dust[StarDust].velocity *= 0.25f;
-            Main.dust[StarDust].rotation *= MathHelper.ToRadians(30f);
-            Main.dust[StarDust].noGravity = true;
+            Dust StarDust = Dust.NewDustDirect(Projectile.position, 49, 49, DustID.GoldFlame, Projectile.velocity.X, Projectile.velocity.Y, 128, default, 2f);
+            StarDust.position = Projectile.Center + Projectile.velocity;
+            StarDust.velocity *= 0.25f;
+            StarDust.noGravity = true;
+
             if (Main.rand.NextBool(4))
             {
-                Gore.NewGore(null, Projectile.position, Projectile.velocity * 0.25f, Utils.SelectRandom(Main.rand, 16, 17, 17, 17), 0.6f);
+                Gore.NewGore(null, Projectile.Center, Projectile.velocity * 0.25f, Utils.SelectRandom(Main.rand, 16, 17, 17, 17), 0.6f);
             }
-
-            SetVisualOffsets();
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
+            base.SetVisualOffsets();
+        }
 
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((98 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((98 / 2) - halfProjHeight);
-        }     
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (!target.immortal && !target.SpawnedFromStatue && !NPCID.Sets.CountsAsCritter[target.type])
+            {
+                for (int numOfSlashes = 0; numOfSlashes < 4; numOfSlashes++)
+                {
+                    Projectile.ai[1] = 1f;
+                    Vector2 newV = Main.rand.NextVector2CircularEdge(800f, 800f);
+                    if (newV.Y < 0f)
+                    {
+                        newV.Y *= -1f;
+                    }
+                    newV.Y += 100f;
+                    Vector2 Vvector = newV.SafeNormalize(Vector2.UnitY) * 6f;
+                    Projectile.NewProjectile(target.GetSource_OnHit(target), target.position - Vvector * 20f, Vvector * 2f, ModContent.ProjectileType<UltraStarProj>(), (int)(damageDone * 1.5f), 0f, Projectile.owner, 0f, 1f);
+                }
+            }
+        }
     }
 }

@@ -11,25 +11,18 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Projectile.width = 50;
-            Projectile.height = 50;
+            Projectile.Size = new(50);
             Projectile.ArmorPenetration = 15;
         }
 
         public override void AI()
         {
             base.AI();            
-            SetVisualOffsets();
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((50 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((50 / 2) - halfProjHeight);
+            base.SetVisualOffsets();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

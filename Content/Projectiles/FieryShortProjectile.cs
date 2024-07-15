@@ -22,11 +22,8 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 0, Color.Orange, 1.25f);
-
-            SetVisualOffsets();
+            Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.OrangeTorch, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default, 1.25f);
+            dust.noGravity = true;
         }
 
         public Player Owner => Main.player[Projectile.owner];
@@ -55,16 +52,15 @@ namespace MoreShortswords.Content.Projectiles
 
         public override Color? GetAlpha(Color lightColor) => Color.White;
 
-
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {           
            
             int halfProjWidth = Projectile.width / 2;
             int halfProjHeight = Projectile.height / 2;
 
             DrawOriginOffsetX = 0;
-            DrawOffsetX = -((42 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((42 / 2) - halfProjHeight);
+            DrawOffsetX = -((Projectile.width / 2) - halfProjWidth);
+            DrawOriginOffsetY = -((Projectile.height / 2) - halfProjHeight);
         }
     }
 }

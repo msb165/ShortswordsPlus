@@ -21,13 +21,8 @@ namespace MoreShortswords.Content.Projectiles
         }
 
         public override void AI()
-        { 
-            
+        {             
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-            Projectile.tileCollide = false;
-
-            SetVisualOffsets();
         }
 
         public Player Owner => Main.player[Projectile.owner];
@@ -59,28 +54,20 @@ namespace MoreShortswords.Content.Projectiles
                         screenPos.X += Main.screenWidth;
                     }
                     screenPos.Y += Main.rand.Next(Main.screenHeight);
-                    //Vector2 screenPositionVec = new(screenPos.X, screenPos.Y);
                     Vector2 targetPosScreen = target.Center - screenPos;
-                    targetPosScreen.X += Main.rand.Next(-50, 51) * 0.1f;
-                    targetPosScreen.Y += Main.rand.Next(-50, 51) * 0.1f;
-                    float sqrtValues = targetPosScreen.Length();
-                    sqrtValues = 15f / sqrtValues;
-                    targetPosScreen.X *= sqrtValues;
-                    targetPosScreen.Y *= sqrtValues;
+                    targetPosScreen.X += Main.rand.Next(-5, 6);
+                    targetPosScreen.Y += Main.rand.Next(-5, 6);
+                    targetPosScreen.Normalize();
+                    targetPosScreen *= 15f;
 
                     Projectile.NewProjectile(Projectile.GetSource_OnHit(target), screenPos, targetPosScreen, ModContent.ProjectileType<SkyBladeProjectile2>(), Projectile.damage / 2, 4f, Owner.whoAmI);
                 }
             }             
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((48 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((48 / 2) - halfProjHeight);
+            base.SetVisualOffsets();
         }
     }
 }

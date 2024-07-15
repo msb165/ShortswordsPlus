@@ -22,23 +22,16 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
 
             if (Main.rand.NextBool(8))
             {
                 Gore.NewGore(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.velocity * 0.25f, Utils.SelectRandom(Main.rand, 16, 17, 17, 17), 0.6f);
             }
-            SetVisualOffsets();
         }
 
-        private void SetVisualOffsets()
-        {            
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((40 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((40 / 2) - halfProjHeight);
+        public override void SetVisualOffsets()
+        {         
+            base.SetVisualOffsets();
         }
 
         public Player Owner => Main.player[Projectile.owner];
@@ -61,19 +54,14 @@ namespace MoreShortswords.Content.Projectiles
 
             if (!target.immortal && !target.SpawnedFromStatue && !NPCID.Sets.CountsAsCritter[target.type])
             {
-                for (int numOfStars = 0; numOfStars < 3; numOfStars++)
+                for (int numOfStars = 0; numOfStars < 1; numOfStars++)
                 {
-                    Vector2 vector = new(target.Center.X + 400, target.Center.Y - Main.rand.Next(500, 800));
-                    Vector2 projTargetDist = Projectile.Center - vector;
-                    projTargetDist.X += Main.rand.Next(-100, 101);
-
-                    float projTargetDistLength = projTargetDist.Length();
-                    projTargetDistLength = 25f / projTargetDistLength;
-                    projTargetDist.X *= projTargetDistLength;
-                    projTargetDist.Y *= projTargetDistLength;                   
+                    Vector2 targetPos = new(target.Center.X + Main.rand.Next(-400, 401), target.Center.Y - 600f);
+                    Vector2 projTargetDist = target.Center - targetPos;                    
+                    projTargetDist.Normalize();
+                    projTargetDist *= 25f;                 
                     
-                    Projectile starproj = Projectile.NewProjectileDirect(target.GetSource_OnHit(target), vector, projTargetDist, ProjectileID.StarCloakStar, 10, 4f, Owner.whoAmI, 0f, Projectile.position.Y);
-                    starproj.DamageType = DamageClass.MeleeNoSpeed;
+                    Projectile starproj = Projectile.NewProjectileDirect(target.GetSource_OnHit(target), targetPos, projTargetDist, ProjectileID.Starfury, Projectile.damage / 2, 4f, Owner.whoAmI, 0f, Projectile.position.Y);
                     starproj.extraUpdates = 1;
                 }
             } 

@@ -14,7 +14,7 @@ namespace MoreShortswords.Content.Projectiles
         public override void SetStaticDefaults()
         {            
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
         }
         public override void SetDefaults()
         {
@@ -35,20 +35,20 @@ namespace MoreShortswords.Content.Projectiles
 
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4 * Projectile.spriteDirection;
 
-            if (Projectile.ai[0] == 60f)
+            if (Projectile.ai[0] == 80f)
             {
                 Projectile.ai[0] = 0f;
                 Projectile.velocity.Y *= -1;
             }
 
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.HotPink, 1.5f);
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.HotPink, 1.25f);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             Vector2 drawOrigin = texture.Size() / 2f;
-            Color drawColor = Color.White;
+            Color drawColor = Color.White with { A = 127 };
             Color drawColor2 = drawColor;
 
             for (int i = 0; i < Projectile.oldPos.Length; i++)

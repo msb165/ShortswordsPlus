@@ -10,7 +10,7 @@ namespace MoreShortswords.Content.Accessories
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Strange Star Sword");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
             // Tooltip.SetDefault("So strange...\n20% more damage and 20% more attack speed if a shortsword or spear is equipped\nCauses stars to fall after taking damage.");
         }
         public override void SetDefaults()
@@ -28,7 +28,7 @@ namespace MoreShortswords.Content.Accessories
             if (player.HeldItem.useStyle == ItemUseStyleID.Rapier || player.HeldItem.useStyle == 15)
             {                
                 player.GetDamage(DamageClass.MeleeNoSpeed) *= 1.20f;
-                player.GetAttackSpeed(DamageClass.MeleeNoSpeed) *= 1.2f;
+                player.GetAttackSpeed(DamageClass.MeleeNoSpeed) *= 1.12f;
                 player.GetCritChance(DamageClass.MeleeNoSpeed) *= 1.25f;                
             }
         }

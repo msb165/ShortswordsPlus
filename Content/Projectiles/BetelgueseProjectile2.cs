@@ -13,7 +13,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            ProjectileID.Sets.TrailingMode[Type] = 2;
         }
 
         public override void SetDefaults()
@@ -32,6 +32,8 @@ namespace MoreShortswords.Content.Projectiles
         {
             float detectRadiusMax = 300f;
             float projSpeed = 20f;
+
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
             NPC closestNPC = FindClosestNPC(detectRadiusMax);
             if (closestNPC == null)
@@ -66,13 +68,13 @@ namespace MoreShortswords.Content.Projectiles
                 float num = 8 - i;
                 Color drawColor2 = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
                 drawColor2 *= num / (ProjectileID.Sets.TrailCacheLength[Projectile.type] * 1.5f);
-                Main.EntitySpriteDraw(trailFire, (Projectile.oldPos[i] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY), null, drawColor2, Projectile.velocity.ToRotation() + MathHelper.PiOver2, drawOrigin, Projectile.scale, spriteEffects, 0);
+                Main.EntitySpriteDraw(trailFire, (Projectile.oldPos[i] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY), null, drawColor2, Projectile.rotation, drawOrigin, Projectile.scale, spriteEffects, 0);
             }
 
             float offsetX = 20f;
             origin.X = Projectile.spriteDirection == -1 ? sourceRectangle.Width - offsetX : offsetX;
 
-            Main.EntitySpriteDraw(trailFire, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), trailFrame, colorHotPink, Projectile.velocity.ToRotation() + MathHelper.PiOver2, origin, Projectile.scale, spriteEffects, 0);            
+            Main.EntitySpriteDraw(trailFire, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), trailFrame, colorHotPink, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0);            
             return false;
         }
 
@@ -99,6 +101,5 @@ namespace MoreShortswords.Content.Projectiles
             }
             return closestNPC;
         }
-
     }
 }

@@ -43,9 +43,9 @@ namespace MoreShortswords.Content.Projectiles
 
             if (!Owner.controlUseItem && !Owner.noItems && !Owner.CCed || Owner.dead || !Owner.active) 
             {
+                Owner.reuseDelay = 4;
                 Projectile.Kill();
-            }     
- 
+            }      
 
             SetPlayerValues();
             SetVisualOffsets();
@@ -67,6 +67,5 @@ namespace MoreShortswords.Content.Projectiles
             DrawOffsetX = -((56 / 2) - halfProjWidth);
             DrawOriginOffsetY = -((56 / 2) - halfProjHeight);
         }
-
     }
 }

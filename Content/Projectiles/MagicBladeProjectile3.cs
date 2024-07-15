@@ -29,11 +29,8 @@ namespace MoreShortswords.Content.Projectiles
         }
 
         public override void AI()
-        {           
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-
-            float wallSize = Projectile.width * Projectile.height * 0.0045f;
-            for (int i = 0; i < wallSize / 2; i++)
+        {          
+            for (int i = 0; i < 7; i++)
             {
                 Dust wallDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan, 0f, 0f, 255, default, 0.75f);
                 wallDust.noGravity = true;

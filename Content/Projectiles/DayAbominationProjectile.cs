@@ -20,18 +20,18 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();            
-            SetVisualOffsets();
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
             int halfProjWidth = Projectile.width / 2;
             int halfProjHeight = Projectile.height / 2;
 
             DrawOriginOffsetX = 0;
-            DrawOffsetX = -((52 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((52 / 2) - halfProjHeight);
+            DrawOffsetX = -((Projectile.width / 2) - halfProjWidth);
+            DrawOriginOffsetY = -((Projectile.height / 2) - halfProjHeight);
         }
+
         public Player Owner => Main.player[Projectile.owner];
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -56,9 +56,9 @@ namespace MoreShortswords.Content.Projectiles
                 newV.Y *= -1f;
             }
             newV.Y += 100f;
-            Vector2 Vvector = newV.SafeNormalize(Vector2.UnitY) * 6f;
+            Vector2 Vvector = newV.SafeNormalize(Vector2.UnitY) * 8f;
 
-            Projectile.NewProjectile(target.GetSource_OnHit(target), target.position - Vvector * 20f, Vvector * 2f, ModContent.ProjectileType<DayAbominationProjectile2>(), (int)(damageDone * 0.75), 0f, Owner.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(target.GetSource_OnHit(target), target.Center - Vvector * 20f, Vvector, ModContent.ProjectileType<DayAbominationProjectile2>(), (int)(damageDone * 0.75), 0f, Owner.whoAmI, 0f, 0f);
         }
     }
 }

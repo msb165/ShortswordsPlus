@@ -25,28 +25,24 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
-            SetVisualOffsets();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!target.HasBuff(BuffID.Confused) && !target.HasBuff(BuffID.Weak))
-            {
-                target.AddBuff(BuffID.Confused, 300);
-                target.AddBuff(BuffID.Weak, 200);
-            }
+            target.AddBuff(BuffID.Confused, 300);
+            target.AddBuff(BuffID.Weak, 200);
+
         }
 
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
             int halfProjWidth = Projectile.width / 2;
             int halfProjHeight = Projectile.height / 2;
 
             DrawOriginOffsetX = 0;
-            DrawOffsetX = -((50 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((50 / 2) - halfProjHeight);
+            DrawOffsetX = -((45 / 2) - halfProjWidth);
+            DrawOriginOffsetY = -((45 / 2) - halfProjHeight);
         }
-
     }
 }

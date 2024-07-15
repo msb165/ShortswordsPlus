@@ -14,7 +14,7 @@ namespace MoreShortswords.Content.Weapons
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("True Star Fragment");            
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {
@@ -33,9 +33,9 @@ namespace MoreShortswords.Content.Weapons
             Item.value = Item.sellPrice(0, 2, 0, 0);
 
             Item.shoot = ModContent.ProjectileType<TrueStarFragmentProjectile>();
-            Item.shootSpeed = 7.5f;
+            Item.shootSpeed = 5f;
 
-            Item.knockBack = 4.3f;
+            Item.knockBack = 0f;
 
             Item.autoReuse = true;
             Item.noMelee = true;

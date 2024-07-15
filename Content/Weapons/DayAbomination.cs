@@ -12,7 +12,7 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -35,6 +35,7 @@ namespace MoreShortswords.Content.Weapons
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
+           
         }         
 
         public override void AddRecipes()

@@ -14,14 +14,13 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Type] = 20;
+            ProjectileID.Sets.TrailingMode[Type] = 3;
         }
 
         public override void SetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
+            Projectile.Size = new(32);
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.alpha = 50;
@@ -29,28 +28,27 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
+            Projectile.aiStyle = -1;
+            Projectile.extraUpdates = 1;
         }
 
         public override void AI()
         {
             if (Projectile.soundDelay == 0)
             {
-                Projectile.soundDelay = 25;
+                Projectile.soundDelay = 40;
                 SoundEngine.PlaySound(SoundID.Item105, Projectile.position);
             }
 
-            if (Projectile.position.Y > Projectile.ai[1])
-            {
-                Projectile.tileCollide = true;
-            }
+            Projectile.tileCollide = Projectile.position.Y > Projectile.ai[1];
 
             if (Main.rand.NextBool(10))
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Pink, Projectile.velocity.X * 0.5f, Projectile.velocity.Y * 0.5f, 150, default, 1.2f);
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.YellowStarDust, 0f, 0f, 150, default, 1.2f);
             }
             if (Main.rand.NextBool(20))
             {
-                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position, new Vector2(Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f), Main.rand.Next(16, 18));
+                Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity * 0.2f, Main.rand.Next(16, 18));
             }
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 * Projectile.spriteDirection;
         }
@@ -86,17 +84,17 @@ namespace MoreShortswords.Content.Projectiles
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
             for (int i = 0; i < 10; i++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Enchanted_Pink, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 150, default, 1.2f);
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.YellowTorch, 0, 0, 150, default, 2f);
+                dust.noGravity = true;
+                dust.velocity *= 4f;
             }
-            for (int j = 0; j < 3; j++)
-            {
-                Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, new Vector2(Projectile.velocity.X * 0.05f, Projectile.velocity.Y * 0.05f), Main.rand.Next(16, 18));
-            }
+            Gore gore = Gore.NewGoreDirect(Projectile.GetSource_Death(), Projectile.position, Vector2.Zero, Main.rand.Next(16, 18));
+            gore.velocity *= 2f;
         }
     }
 }

@@ -13,25 +13,25 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetDefaults()
         {            
-            base.SetDefaults();                   
+            base.SetDefaults();
+            Projectile.width = 36;
+            Projectile.height = 38;
         }
 
         public override void AI()
         {
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
-            SetVisualOffsets();
         }
 
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {            
             int halfProjWidth = Projectile.width / 2;
             int halfProjHeight = Projectile.height / 2;
 
             DrawOriginOffsetX = 0;
-            DrawOffsetX = -((36 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((38 / 2) - halfProjHeight);
+            DrawOffsetX = -((Projectile.width / 2) - halfProjWidth);
+            DrawOriginOffsetY = -((Projectile.height / 2) - halfProjHeight);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

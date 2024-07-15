@@ -10,7 +10,7 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {
@@ -24,7 +24,7 @@ namespace MoreShortswords.Content.Weapons
             Item.UseSound = SoundID.Item1;
 
             Item.damage = 100;
-            Item.knockBack = 7f;
+            Item.knockBack = 4f;
 
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(0, 2, 25, 0);

@@ -51,7 +51,7 @@ namespace MoreShortswords.Content.Projectiles
             return false;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.NPCHit3, Projectile.position);
             for (int numOfParticles = 0; numOfParticles < 16; numOfParticles++)

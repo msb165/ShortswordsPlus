@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using MoreShortswords.Content.Projectiles;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 
 namespace MoreShortswords.Content.Weapons
 {
@@ -13,7 +14,7 @@ namespace MoreShortswords.Content.Weapons
 		{
 			// DisplayName.SetDefault("Cosmic Blade");
             // Tooltip.SetDefault("Press right click to throw it.");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
 		}
 
 		public override void SetDefaults()
@@ -37,42 +38,25 @@ namespace MoreShortswords.Content.Weapons
 
 			Item.crit = 8;
 
+			Item.shoot = ModContent.ProjectileType<CosmicBladeProjectile>();
+			Item.shootSpeed = 6f;
+
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
 			Item.autoReuse = true;
-			ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
 		}
 
-        public override bool CanUseItem(Player player)
+		private int shootCounter;
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			if (player.altFunctionUse == 2)
+            shootCounter++;
+            if (shootCounter == 3)
             {
-				Item.shoot = ModContent.ProjectileType<CosmicBladeProjectile2>();
-                Item.damage = 52;
-                Item.shootSpeed = 10f;
-			}
-            else
-            {
-				Item.shoot = ModContent.ProjectileType<CosmicBladeProjectile>();
-                Item.damage = 104;
-                Item.shootSpeed = 8.2f;
-			}
-			return true;			
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                Item.useAnimation = 20;
-                Item.useTime = 20;
+                shootCounter = 0;
+                Projectile.NewProjectile(source, position, velocity * 1.25f, ModContent.ProjectileType<CosmicBladeThrown>(), (int)(damage * 1.25f), knockback, player.whoAmI);
+				return false;
             }
-            else
-            {
-                Item.useAnimation = 10;
-                Item.useTime = 10;
-            }
-            return true;
+			return true;
         }
 
         public override void ModifyWeaponCrit(Player player, ref float crit)
@@ -82,10 +66,6 @@ namespace MoreShortswords.Content.Weapons
 				crit += 4;				
 			}
 		}
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            velocity = velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.PiOver4 * (Main.rand.NextFloat() - 0.5f)) * (velocity.Length() - Main.rand.NextFloatDirection() * 0.8f);
-        }
 
         public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
         {
@@ -94,11 +74,5 @@ namespace MoreShortswords.Content.Weapons
 				damage += 4;
 			}
         }
-
-        public override bool AltFunctionUse(Player player)
-        {
-			return player.ownedProjectileCounts[ModContent.ProjectileType<CosmicBladeProjectile2>()] < 8;
-		}
-
     }
 }

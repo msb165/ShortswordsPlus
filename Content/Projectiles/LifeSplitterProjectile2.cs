@@ -14,14 +14,15 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetStaticDefaults()
         {
+            ProjectileID.Sets.TrailCacheLength[Type] = 30;
             ProjectileID.Sets.TrailingMode[Type] = 3;
-            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Type] = true;
         }
 
         public override void SetDefaults()
         {            
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 190;
+            Projectile.timeLeft = 100;
             Projectile.penetrate = 1;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
@@ -33,16 +34,28 @@ namespace MoreShortswords.Content.Projectiles
             float detectRadiusMax = 300f;
             float projSpeed = 20f;
 
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), Projectile.velocity.X * 0.8f, Projectile.velocity.Y * 0.8f, 0, Color.Green, 1.25f);
-            
+            for (int i = 0; i < 3; i++)
+            {
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Green, 0, 0, 0, Color.Green, 1f);
+                dust.noGravity = true;
+                dust.velocity *= 0.5f;
+                dust.velocity -= Projectile.velocity * 0.1f;
+
+                Dust dust2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.SpectreStaff, 0, 0, 0, Color.Green, 1.5f);
+                dust2.noGravity = true;
+                dust2.velocity *= 0.5f;
+                dust2.velocity -= Projectile.velocity * 0.1f;
+            }
+
+            Projectile.rotation = Projectile.velocity.ToRotation();
+
             NPC closestNPC = FindClosestNPC(detectRadiusMax);
-            if (closestNPC == null)
+            if (closestNPC is null)
             {
                 return;
             }
             
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, (closestNPC.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * projSpeed, 0.2f);
-            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override Color? GetAlpha(Color lightColor) => Color.Green with { A = 0 };

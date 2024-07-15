@@ -22,24 +22,22 @@ namespace MoreShortswords.Content.Projectiles
 
             if (Main.rand.NextBool(8))
             {
-                Gore FlyingHeartGore = Gore.NewGoreDirect(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.velocity * 0.8f, 331, 1f);
+                Gore FlyingHeartGore = Gore.NewGoreDirect(Projectile.GetSource_FromAI(), Projectile.Center, Projectile.velocity * 0.2f, 331, 1f);
                 FlyingHeartGore.sticky = false;
             }
-            SetVisualOffsets();
         }
-        private void SetVisualOffsets()
-        {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
 
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((48 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((48 / 2) - halfProjHeight);
+        public override void SetVisualOffsets()
+        {
+            base.SetVisualOffsets();
         }
 
         Player Owner => Main.player[Projectile.owner];
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Gore FlyingHeartGore = Gore.NewGoreDirect(Projectile.GetSource_FromAI(), target.Center, Projectile.velocity * 0.2f, 331, 1f);
+            FlyingHeartGore.sticky = false;
+
             if (Owner.GetModPlayer<MoreShortPlayer>().swordTimer == 0)
             {
                 Owner.GetModPlayer<MoreShortPlayer>().swordTimer = 40;
@@ -51,7 +49,7 @@ namespace MoreShortswords.Content.Projectiles
 
             if (hit.Crit && Main.rand.NextBool(4) && !NPCID.Sets.CountsAsCritter[target.type] && !target.immortal)
             {
-                float newDamage = Main.rand.Next(1, 4);
+                float newDamage = Main.rand.Next(3, 8);
                 if ((int)newDamage != 0 && !(Owner.lifeSteal <= 0f))
                 {
                     Owner.lifeSteal -= newDamage;

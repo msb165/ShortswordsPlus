@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -11,7 +12,6 @@ namespace MoreShortswords.Content.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Daylight's Abomination");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -28,14 +28,13 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            int fireDust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, Projectile.velocity.X, Projectile.velocity.Y, 100, default, 1.5f);
-            Main.dust[fireDust].noGravity = true;
-            Dust secFireDust = Main.dust[fireDust];
-            secFireDust.alpha = 100;
-            secFireDust.velocity *= 0.3f;            
+            Dust fireDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, 0, 0, 100, default, 1f);
+            fireDust.noGravity = true;
+            fireDust.alpha = 100;
+            fireDust.velocity *= 0.3f;
+            fireDust.velocity += Projectile.velocity * 0.1f;
 
             Projectile.rotation = Projectile.velocity.ToRotation();
-
 
             if (Projectile.ai[1] == 0f)
             {
@@ -78,25 +77,22 @@ namespace MoreShortswords.Content.Projectiles
             }
 
             SoundEngine.PlaySound(SoundID.NPCHit3, Projectile.position);
-            for (int numOfParticles = 0; numOfParticles < 16; numOfParticles++) 
+            for (int i = 0; i < 16; i++) 
             { 
-                int dustExplode = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, default, 1.2f);
+                int dustExplode = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemTopaz, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, default, 1f);
                 Main.dust[dustExplode].noGravity = true;
                 Dust dustExplodeAlt = Main.dust[dustExplode];
                 dustExplodeAlt.scale *= 1.25f;
                 dustExplodeAlt.velocity *= 0.5f;
-                Projectile.rotation = Projectile.velocity.ToRotation();
             }       
 
             for (int j = 0; j < 2; j++)
             {
-                Vector2 newVelocity = Vector2.Normalize(Projectile.velocity) * 14f;
-                float[] value = {0f, 5f, -5f};
-                newVelocity = newVelocity.RotatedBy(value[j] * MathHelper.PiOver2 - MathHelper.PiOver4);
-                Projectile.NewProjectile(Projectile.GetSource_Death(), new Vector2(Projectile.position.X + (10f * Projectile.direction), Projectile.position.Y + 10f), newVelocity, ModContent.ProjectileType<DayAbominationProjectile2>(), Projectile.damage / 3, 4f, Projectile.owner, 1f);                 
-            }          
-            
+                //Vector2 newVelocity = Projectile.oldVelocity;
+                //newVelocity = newVelocity.RotatedBy(j * 5f);
+                //newVelocity.Normalize();
+                Projectile.NewProjectileDirect(Projectile.GetSource_Death(), Projectile.oldPos[9], Projectile.oldVelocity, ModContent.ProjectileType<DayAbominationProjectile2>(), Projectile.damage / 2, 4f, Projectile.owner, 1f);
+            }         
         }
-
     }
 }

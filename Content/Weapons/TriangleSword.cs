@@ -13,7 +13,7 @@ namespace MoreShortswords.Content.Weapons
         {
             // DisplayName.SetDefault("Killer's Blade");
             // Tooltip.SetDefault("33% chance to inflict weakness and bleeding on an enemy.");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {

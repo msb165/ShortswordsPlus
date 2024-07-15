@@ -15,7 +15,7 @@ namespace MoreShortswords.Content.Weapons
         {
             // DisplayName.SetDefault("Grassy Shiv");
             // Tooltip.SetDefault("20% chance of inflicting poison on an enemy.");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()

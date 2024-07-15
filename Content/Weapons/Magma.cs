@@ -11,31 +11,24 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Magma");
-            // Tooltip.SetDefault("\"Careful, it's hot!\"");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
+
         public override void SetDefaults()
         {
             Item.width = 48;
             Item.height = 48;
-
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.useAnimation = 26;
             Item.useTime = 26;
             Item.UseSound = SoundID.Item1;
-
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 0, 60, 0);
-
             Item.damage = 30;
             Item.knockBack = 5f;
-
             Item.DamageType = DamageClass.MeleeNoSpeed;
-
             Item.shoot = ModContent.ProjectileType<FieryShortProjectile>();
             Item.shootSpeed = 3.5f;
-
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;

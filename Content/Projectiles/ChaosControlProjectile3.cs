@@ -19,7 +19,6 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetDefaults()
         {
-            base.SetDefaults();
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.ownerHitCheck = true;

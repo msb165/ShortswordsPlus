@@ -10,22 +10,21 @@ namespace MoreShortswords.Content.Projectiles
     {
         public override string Texture => ModContent.GetInstance<NaturesBless>().Texture;
 
-
         public override void SetDefaults()
         {
             base.SetDefaults();
+            Projectile.Size = new(64);
             Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 17;
         }
 
         public override void AI()
         {
-            base.AI();
+            base.AI();  
 
-            int TestDust = Dust.NewDust(new Vector2(Projectile.position.X + 0.25f, Projectile.position.Y), Projectile.width, Projectile.height, DustID.GrassBlades, Projectile.velocity.X * 0.8f + (Projectile.spriteDirection * 3), Projectile.velocity.Y * 0.2f, 128, default, 1.4f);
-            Main.dust[TestDust].velocity *= 0.4f;
-            Main.dust[TestDust].noGravity = true;
-
-            SetVisualOffsets();
+            Dust TestDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GrassBlades, Projectile.velocity.X * 0.8f, Projectile.velocity.Y * 0.8f, 128, default, 1.4f);
+            TestDust.velocity *= 0.4f;
+            TestDust.noGravity = true;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -51,20 +50,16 @@ namespace MoreShortswords.Content.Projectiles
                 return;
             }
 
+
             if (!target.immortal && !target.SpawnedFromStatue && !NPCID.Sets.CountsAsCritter[target.type])
             {           
-                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity * 2.25f, ProjectileID.VilethornBase, Projectile.damage, 0f, Owner.whoAmI);
+                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity * 4f, ProjectileID.VilethornBase, Projectile.damage, 0f, Owner.whoAmI);
             }            
         }
 
-        private void SetVisualOffsets()
+        public override void SetVisualOffsets()
         {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((64 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((64 / 2) - halfProjHeight);
+            base.SetVisualOffsets();
         }
     }
 }

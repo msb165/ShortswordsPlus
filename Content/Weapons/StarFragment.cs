@@ -11,7 +11,7 @@ namespace MoreShortswords.Content.Weapons
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Star Fragment");            
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
         public override void SetDefaults()
         {

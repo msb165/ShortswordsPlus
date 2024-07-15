@@ -12,7 +12,7 @@ namespace MoreShortswords.Content.Weapons
         {
             // DisplayName.SetDefault("Life Splitter");
             // Tooltip.SetDefault("25% chance to inflict weakness on an enemy.");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
