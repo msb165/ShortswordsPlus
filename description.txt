@@ -1,7 +1,6 @@
-"Shortswords+" is a mod that add brand new shortswords to the game's progression.
-This mod also enables auto-swing for all shortswords.
+"Shortswords+" is a mod that adds brand new shortswords to the game's progression.
 
 This mod currently adds:
 
-- 23 shortswords.
+- 24 shortswords.
 - 2 accessories.
