@@ -1,8 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
-using Microsoft.Xna.Framework;
-using MoreShortswords.Content.Weapons;
 using Terraria.ModLoader;
+using MoreShortswords.Content.Weapons;
 
 namespace MoreShortswords.Content.Projectiles
 {
@@ -35,7 +34,7 @@ namespace MoreShortswords.Content.Projectiles
                 Owner.AddBuff(BuffID.DryadsWard, 900);
             }
 
-            if (Main.rand.NextBool(3) && !target.HasBuff(BuffID.DryadsWardDebuff) && !target.HasBuff(BuffID.Venom))
+            if (Main.rand.NextBool(3))
             {
                 target.AddBuff(BuffID.DryadsWardDebuff, 600);
                 target.AddBuff(BuffID.Venom, 600);
@@ -50,16 +49,10 @@ namespace MoreShortswords.Content.Projectiles
                 return;
             }
 
-
             if (!target.immortal && !target.SpawnedFromStatue && !NPCID.Sets.CountsAsCritter[target.type])
             {           
-                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity * 4f, ProjectileID.VilethornBase, Projectile.damage, 0f, Owner.whoAmI);
+                Projectile.NewProjectile(target.GetSource_OnHit(target), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<NatureThornBase>(), Projectile.damage, 0f, Owner.whoAmI);
             }            
-        }
-
-        public override void SetVisualOffsets()
-        {
-            base.SetVisualOffsets();
         }
     }
 }

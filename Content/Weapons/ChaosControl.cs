@@ -12,8 +12,6 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Chaos Control");
-            // Tooltip.SetDefault("Press right click to throw a tornado.");
             Item.ResearchUnlockCount = 1;
         }
 
@@ -21,33 +19,25 @@ namespace MoreShortswords.Content.Weapons
         {
             Item.width = 50;
             Item.height = 50;
-
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.UseSound = SoundID.Item1;
-
             Item.knockBack = 4.3f;
-
             Item.damage = 72;
             Item.DamageType = DamageClass.MeleeNoSpeed;
-
             Item.crit = 8;
-
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(0, 0, 40, 0);
-
             Item.shoot = ModContent.ProjectileType<ChaosControlProjectile>();
-            Item.shootSpeed = 5f;
+            Item.shootSpeed = 3f;
             Item.useTime = 19;
             Item.useAnimation = 19;
-
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            Projectile.NewProjectile(source, position, velocity * 2f, ModContent.ProjectileType<ChaosControlProjectile2>(), damage, knockback, player.whoAmI);
+        {            
             return true;
         }
 

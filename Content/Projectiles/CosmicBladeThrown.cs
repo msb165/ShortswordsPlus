@@ -31,7 +31,7 @@ namespace MoreShortswords.Content.Projectiles
 			Projectile.alpha = 0;
 			Projectile.extraUpdates = 1;
 			Projectile.timeLeft = 200;
-			Projectile.aiStyle = ProjAIStyleID.Arrow;
+			Projectile.aiStyle = -1;
             Projectile.damage = 94;
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 17;
@@ -39,6 +39,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
+			Projectile.velocity.Y += 0.4f;
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
 
 			if (Main.rand.NextBool(3))
@@ -60,11 +61,11 @@ namespace MoreShortswords.Content.Projectiles
 			SoundEngine.PlaySound(SoundID.NPCHit3, Projectile.position);
 			for (int numOfParticles = 0; numOfParticles < 16; numOfParticles++)
 			{
-				int dustExplode = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1f);
+				int dustExplode = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit, Projectile.velocity.X, Projectile.velocity.Y, 255, default, 1.25f);
 				Main.dust[dustExplode].noGravity = true;
 				Dust dustExplodeAlt = Main.dust[dustExplode];				
 
-				dustExplodeAlt.scale *= 1.1f;
+				dustExplodeAlt.scale *= 1.25f;
 				dustExplodeAlt.velocity = Projectile.velocity.RotatedByRandom(15f);
 			}
 		}

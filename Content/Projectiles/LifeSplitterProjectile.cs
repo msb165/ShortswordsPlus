@@ -22,10 +22,6 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
-            Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Green, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 0, default, 1.25f);
-            dust.noGravity = true;
-            dust.position = Projectile.Center;
-            dust.velocity *= 0f;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -55,11 +51,11 @@ namespace MoreShortswords.Content.Projectiles
             {
                 for (int projsToSpawn = 0; projsToSpawn < 3; projsToSpawn++)
                 {
-                    Vector2 vector = new(target.Center.X + Main.rand.Next(-400, 400), target.Center.Y - Main.rand.Next(600, 800));
+                    Vector2 vector = new(target.Center.X + Main.rand.Next(-400, 400), target.Center.Y - 500f);
                     Vector2 targetPos = target.Center + (Projectile.Size / 2) - vector;
                     targetPos.X += Main.rand.Next(-100, 101);
                     targetPos.Normalize();
-                    targetPos *= 25f;            
+                    targetPos *= 12f;            
                     Projectile.NewProjectile(target.GetSource_OnHit(target), vector, targetPos, ModContent.ProjectileType<LifeSplitterProjectile2>(), (int)(damageDone * 0.75f), 5f, Owner.whoAmI, 0f, 0f);
                 }
             }

@@ -13,30 +13,23 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("True Star Fragment");            
             Item.ResearchUnlockCount = 1;
         }
+
         public override void SetDefaults()
         {
-            Item.width = 54;
-            Item.height = 54;
-
+            Item.Size = new(54);
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.useTime = 16;
             Item.useAnimation = 16;
             Item.UseSound = SoundID.Item1;
-
             Item.damage = 85;
             Item.DamageType = DamageClass.MeleeNoSpeed;
-
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(0, 2, 0, 0);
-
             Item.shoot = ModContent.ProjectileType<TrueStarFragmentProjectile>();
             Item.shootSpeed = 5f;
-
             Item.knockBack = 0f;
-
             Item.autoReuse = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;

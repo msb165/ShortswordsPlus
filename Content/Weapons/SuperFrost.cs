@@ -20,8 +20,8 @@ namespace MoreShortswords.Content.Weapons
             Item.damage = 47;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 4f;
-            Item.rare = ItemRarityID.White;
-            Item.value = Item.sellPrice(0, 0, 50, 0);
+            Item.rare = ItemRarityID.Pink;
+            Item.value = Item.sellPrice(0, 0, 75, 0);
             Item.shoot = ModContent.ProjectileType<SuperFrostProjectile>();
             Item.shootSpeed = 3f;
             Item.noUseGraphic = true;

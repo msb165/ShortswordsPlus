@@ -12,8 +12,6 @@ namespace MoreShortswords.Content.Weapons
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Deity Spear");
-            // Tooltip.SetDefault("Press right click to throw it.\n You can throw 2 at the same time.");
             Item.ResearchUnlockCount = 1;
         }
 

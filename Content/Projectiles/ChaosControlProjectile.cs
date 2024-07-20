@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Mono.Cecil;
 using MoreShortswords.Content.Weapons;
 using Terraria;
 using Terraria.ID;
@@ -25,6 +26,11 @@ namespace MoreShortswords.Content.Projectiles
         public override void AI()
         {
             base.AI();
+            if (Projectile.ai[1] == 0f)
+            {
+                Projectile.ai[1] = 1f;
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 45f, Projectile.velocity * 3f, ModContent.ProjectileType<ChaosControlProjectile2>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -37,12 +43,7 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void SetVisualOffsets()
         {
-            int halfProjWidth = Projectile.width / 2;
-            int halfProjHeight = Projectile.height / 2;
-
-            DrawOriginOffsetX = 0;
-            DrawOffsetX = -((45 / 2) - halfProjWidth);
-            DrawOriginOffsetY = -((45 / 2) - halfProjHeight);
+            base.SetVisualOffsets();
         }
     }
 }

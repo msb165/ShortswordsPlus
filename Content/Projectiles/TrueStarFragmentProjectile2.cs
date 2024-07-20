@@ -74,12 +74,12 @@ namespace MoreShortswords.Content.Projectiles
                 Vector2 drawPos = Projectile.oldPos[j] - Main.screenPosition + Projectile.Size / 2f + new Vector2(0f, Projectile.gfxOffY);
                 
                 drawColorGlow *= 0.5f;
-                drawColor *= 0.6f;
+                drawColor *= 0.75f;
 
-                Main.EntitySpriteDraw(glowTexture, drawPos, glowTexture.Frame(), drawColorGlow, Projectile.rotation, glowTexture.Size() / 2f, Projectile.scale - j / (float) Projectile.oldPos.Length, SpriteEffects.None, 0);
                 Main.EntitySpriteDraw(texture, drawPos, texture.Frame(), drawColor, Projectile.rotation, origin, Projectile.scale - j / (float) Projectile.oldPos.Length, spriteEffects, 0);
+                Main.EntitySpriteDraw(glowTexture, drawPos, glowTexture.Frame(), drawColorGlow, Projectile.rotation, glowTexture.Size() / 2f, Projectile.scale - j / (float)Projectile.oldPos.Length, SpriteEffects.None, 0);
             }
-            
+
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), texture.Frame(), Color.White, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0);            
             return false;
         }

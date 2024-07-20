@@ -38,19 +38,19 @@ namespace MoreShortswords.Content.Projectiles
             Gore FlyingHeartGore = Gore.NewGoreDirect(Projectile.GetSource_FromAI(), target.Center, Projectile.velocity * 0.2f, 331, 1f);
             FlyingHeartGore.sticky = false;
 
-            if (Owner.GetModPlayer<MoreShortPlayer>().swordTimer == 0)
+            /*if (Owner.GetModPlayer<MoreShortPlayer>().swordTimer == 0)
             {
                 Owner.GetModPlayer<MoreShortPlayer>().swordTimer = 40;
             }
             else
             {
                 return;
-            }
+            }*/
 
-            if (hit.Crit && Main.rand.NextBool(4) && !NPCID.Sets.CountsAsCritter[target.type] && !target.immortal)
+            if (hit.Crit && !NPCID.Sets.CountsAsCritter[target.type] && !target.immortal)
             {
-                float newDamage = Main.rand.Next(3, 8);
-                if ((int)newDamage != 0 && !(Owner.lifeSteal <= 0f))
+                float newDamage = Main.rand.Next(5, 13);
+                if (!(Owner.lifeSteal <= 0f))
                 {
                     Owner.lifeSteal -= newDamage;
                     int playerOwner = Projectile.owner;

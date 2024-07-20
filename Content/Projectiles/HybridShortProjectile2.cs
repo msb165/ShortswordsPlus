@@ -16,6 +16,7 @@ namespace MoreShortswords.Content.Projectiles
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
         }
+
         public override void SetDefaults()
         {
             Projectile.aiStyle = -1;
@@ -29,16 +30,14 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            base.AI();            
-
-            Projectile.ai[0] += 1f;
-
+            base.AI();           
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4 * Projectile.spriteDirection;
 
+            Projectile.ai[0] += 1f;
             if (Projectile.ai[0] == 80f)
             {
                 Projectile.ai[0] = 0f;
-                Projectile.velocity.Y *= -1;
+                Projectile.velocity.Y *= -1f;
             }
 
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.HotPink, 1.25f);

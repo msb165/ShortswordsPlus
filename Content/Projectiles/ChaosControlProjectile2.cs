@@ -3,6 +3,8 @@ using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using static Humanizer.In;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace MoreShortswords.Content.Projectiles
 { 
@@ -11,20 +13,20 @@ namespace MoreShortswords.Content.Projectiles
     {
         public override string Texture => "MoreShortswords/Content/Projectiles/ChaosControlProjectile2";
 
-        
-
         public override void SetDefaults()
         {            
             Projectile.ArmorPenetration = 20;
-            Projectile.width = 40;
-            Projectile.height = 40;
+            Projectile.width = 20;
+            Projectile.height = 20;
             Projectile.DamageType = DamageClass.MeleeNoSpeed;
             Projectile.timeLeft = 300;
-            Projectile.ownerHitCheck = true;
+            //Projectile.ownerHitCheck = true;
             Projectile.friendly = true;
             Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
         }
 
         public Player Owner => Main.player[Projectile.owner];
@@ -58,9 +60,14 @@ namespace MoreShortswords.Content.Projectiles
 
         public override void AI()
         {
-            base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4 * Projectile.spriteDirection;
+            if (Projectile.ai[0] == 0f)
+            {
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4;
+                Projectile.ai[0] = 1f;
+            }
 
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4;
+            
             if (Projectile.alpha < 0)
             {
                 Projectile.alpha = 0;
@@ -73,5 +80,15 @@ namespace MoreShortswords.Content.Projectiles
             }
         }
 
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = TextureAssets.Projectile[Type].Value;
+            Color drawColor = Projectile.GetAlpha(lightColor);
+            Vector2 drawOrigin = new(texture.Width, 0f);
+            float rotation = Projectile.rotation;
+
+            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, drawColor, rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
+            return false;
+        }
     }
 }

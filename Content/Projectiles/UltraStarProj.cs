@@ -29,7 +29,7 @@ namespace MoreShortswords.Content.Projectiles
             Projectile.timeLeft = 30;
             Projectile.aiStyle = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.localNPCHitCooldown = 18;
         }
 
         public override void AI()
@@ -68,6 +68,7 @@ namespace MoreShortswords.Content.Projectiles
         {
             Texture2D texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
             Texture2D glowTexture = (Texture2D)ModContent.Request<Texture2D>("MoreShortswords/Assets/GlowSphere");
+            float glowScale = Projectile.scale * 0.5f;
             SpriteBatch spriteBatch = Main.spriteBatch;
 
             Color drawColorGlow = Color.Gold with { A = 0 };
@@ -81,8 +82,9 @@ namespace MoreShortswords.Content.Projectiles
                 Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f + new Vector2(0f, Projectile.gfxOffY);
                 drawColorGlow *= 0.5f;
                 drawColor *= 0.75f;
+                glowScale = MathHelper.Clamp(glowScale - i / (float)Projectile.oldPos.Length, 0f, 1f);
 
-                spriteBatch.Draw(glowTexture, drawPos, null, drawColorGlow, Projectile.rotation, drawGlowOrigin, Projectile.scale - i / (float) Projectile.oldPos.Length, SpriteEffects.None, 0);
+                spriteBatch.Draw(glowTexture, drawPos, null, drawColorGlow, Projectile.rotation, drawGlowOrigin, glowScale, SpriteEffects.None, 0);
                 spriteBatch.Draw(texture, drawPos, null, drawColor, Projectile.rotation, drawOrigin, Projectile.scale - i / (float)Projectile.oldPos.Length, SpriteEffects.None, 0);
             }
 
@@ -95,7 +97,8 @@ namespace MoreShortswords.Content.Projectiles
             SoundEngine.PlaySound(SoundID.NPCHit3, Projectile.position);
             for (int i = 0; i < 10; i++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.Gold, 1.5f);
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowDust>(), 0f, 0f, 0, Color.Gold, 1f);
+                dust.velocity *= 4f;
             }
         }
     }

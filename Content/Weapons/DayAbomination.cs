@@ -21,17 +21,13 @@ namespace MoreShortswords.Content.Weapons
             Item.useAnimation = 22;
             Item.useTime = 22;
             Item.UseSound = SoundID.Item1;
-
             Item.damage = 40;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 4.5f;
-
             Item.shoot = ModContent.ProjectileType<DayAbominationProjectile>();
             Item.shootSpeed = 5f;
-
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(0, 2, 0, 0);
-
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
