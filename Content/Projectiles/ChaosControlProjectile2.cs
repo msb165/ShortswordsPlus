@@ -58,14 +58,9 @@ namespace MoreShortswords.Content.Projectiles
 
         public override Color? GetAlpha(Color lightColor) => Color.White with { A = 0 } * Projectile.Opacity;
 
+
         public override void AI()
         {
-            if (Projectile.ai[0] == 0f)
-            {
-                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4;
-                Projectile.ai[0] = 1f;
-            }
-
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 - MathHelper.PiOver4;
             
             if (Projectile.alpha < 0)
